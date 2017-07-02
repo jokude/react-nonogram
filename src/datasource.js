@@ -1,7 +1,7 @@
 const categories = [
   {
     id: 0,
-    title: 'Animals',
+    title: 'Food',
     imageUrl: '',
   },
   {
@@ -11,7 +11,7 @@ const categories = [
   },
   {
     id: 2,
-    title: 'Food',
+    title: 'Animals',
     imageUrl: ''
   },
   {
@@ -74,131 +74,10 @@ const categories = [
 const levels = [
   {
     id: 0,
-    title: 'Grid0',
-    grid: [[true, false, false, true], [false, true, true, false], [true, false, true, false], [true, true, false, false]],
-    category: 0
-  },
-  {
-    id: 1,
-    title: 'Grid1',
-    grid: [[false, false, true], [false, false, true], [true, true, true]],
-    category: 0
-  },
-  {
-    id: 2,
-    title: 'Grid2',
-    grid: [[false, false, true], [false, false, true], [true, true, true]],
-    category: 0
-  },
-  {
-    id: 3,
-    title: 'Grid3',
-    grid: [[false, false, true], [false, false, true], [true, true, true]],
-    category: 1
-  },
-  {
-    id: 4,
-    title: 'Grid3',
-    grid: [[false, false, true], [false, false, true], [true, true, true]],
-    category: 1
-  },
-  {
-    id: 5,
-    title: 'Grid3',
-    grid: [[false, false, true], [false, false, true], [true, true, true]],
-    category: 1,
-    size: 5
-  },
-  {
-    id: 6,
-    title: 'Grid3',
-    grid: [[false, false, true], [false, false, true], [true, true, true]],
-    category: 1
-  },
-      {
-    id: 7,
-    title: 'Grid0',
-    grid: [[true, false, false], [false, true, true], [true, false, true]],
-    category: 1
-  },
-  {
-    id: 8,
-    title: 'Grid1',
-    grid: [[false, false, true], [false, false, true], [true, true, true]],
-    category: 1
-  },
-  {
-    id: 9,
-    title: 'Grid2',
-    grid: [[false, false, true], [false, false, true], [true, true, true]],
-    category: 2
-  },
-  {
-    id: 10,
-    title: 'Grid3',
-    grid: [[false, false, true], [false, false, true], [true, true, true]],
-    category: 2
-  },
-  {
-    id: 11,
-    title: 'Grid3',
-    grid: [[false, false, true, false], [false, false, true, true], [true, true, true, true], [true, false, true, false]],
-    category: 2,
-    size: 4
-  },
-  {
-    id: 12,
-    title: 'Grid3',
-    grid: [[false, false, true], [false, false, true], [true, true, true]],
-    category: 2
-  },
-  {
-    id: 13,
-    title: 'Grid3',
-    grid: [[false, false, true], [false, false, true], [true, true, true]],
-    category: 3
-  },
-      {
-    id: 14,
-    title: 'Grid0',
-    grid: [[true, false, false], [false, true, true], [true, false, true]],
-    category: 3
-  },
-  {
-    id: 15,
-    title: 'Grid1',
-    grid: [[false, false, true], [false, false, true], [true, true, true]],
-    category: 3
-  },
-  {
-    id: 16,
-    title: 'Grid2',
-    grid: [[false, false, true], [false, false, true], [true, true, true]],
-    category: 4
-  },
-  {
-    id: 17,
-    title: 'Grid3',
-    grid: [[false, false, true], [false, false, true], [true, true, true]],
-    category: 5
-  },
-  {
-    id: 18,
-    title: 'Grid3',
-    grid: [[false, false, true], [false, false, true], [true, true, true]],
-    category: 5
-  },
-  {
-    id: 19,
-    title: 'Grid3',
-    grid: [[false, false, true], [false, false, true], [true, true, true]],
-    category: 5
-  },
-  {
-    id: 20,
-    title: 'Grid3',
-    grid: [[false, false, true], [false, false, true], [true, true, true]],
-    category: 5
+    category: 0,
+    title: 'Beer',
+    size: 16,
+    grid: '1000000000011111#0111111111101111#0111111111101111#0000000000000001#0111111111101110#0111111110101110#0101110110101110#0101110110101110#0101110110101110#0101110110101110#0101110110101110#0101110110101110#0101110110101110#0101110110100001#0111111111101111#1000000000011111'
   }
 ];
 
@@ -208,6 +87,13 @@ class Datasource {
 
 Datasource.getCategories = () => categories;
 Datasource.getLevelsByCategory = (categoryId) => levels.filter(level => categoryId == level.category);
-Datasource.getLevel = (levelId) => levels[levelId];
+Datasource.getLevel = (levelId) => {
+  const level = levels[levelId];
+  return {
+    title: level.title,
+    size: level.size,
+    grid: level.grid.split('#').map(row => row.split('').map(cell => cell == '0' ? true : false))
+  }
+}
 
 export default Datasource;

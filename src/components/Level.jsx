@@ -6,6 +6,8 @@ import IconButton from 'material-ui/IconButton';
 import PauseIcon from 'material-ui/svg-icons/av/pause';
 import WrongIcon from 'material-ui/svg-icons/navigation/close';
 import BlockedIcon from 'material-ui/svg-icons/content/flag';
+import Dialog from 'material-ui/Dialog';
+import SvgIcon from 'material-ui/SvgIcon';
 
 const CELL = {
   EMPTY: 0,
@@ -19,19 +21,16 @@ class Level extends React.Component {
   constructor(props){
     super(props);
 
+    this.level = Datasource.getLevel(this.props.levelId);
+
     this.state = {
-      grid: Datasource.getLevel(this.props.levelId).grid.map(row => row.map(cell => ({ solution: cell, state: CELL.EMPTY }) ))
+      grid: this.level.grid.map(row => row.map(cell => ({ solution: cell, state: CELL.EMPTY }) )),
+      finished: false
     }
 
     this.cellLeftClick = this.cellLeftClick.bind(this);
     this.cellRightClick = this.cellRightClick.bind(this);
-  }
-
-  componentDidUpdate(){
-    const solved = this.state.grid.every(row => row.every(cell => (cell === CELL.SOLVED) === cell.solution));
-    if(solved){
-
-    }
+    this.onTimeout = this.onTimeout.bind(this);
   }
 
   cellLeftClick(row, column){
@@ -45,7 +44,12 @@ class Level extends React.Component {
         grid[row][column].state = CELL.EMPTY;
         break;
     }
-    this.setState({ grid: grid });
+    this.setState({ grid: grid }, () => {
+      const solved = this.state.grid.every(row => row.every(cell => (cell.state === CELL.SOLVED) === cell.solution));
+      if(solved){
+        this.setState({ finished: true });
+      }
+    });
   }
 
   cellRightClick(row, column){
@@ -61,12 +65,14 @@ class Level extends React.Component {
     this.setState({ grid: grid });
   }
 
+  onTimeout(){  }
+
   render() {
 
     let hintColumns = [];
     let fullRow = [];
 
-    for(let i = 0; i < this.state.grid.length; i++){
+    for(let i = 0; i < this.level.size; i++){
       
       hintColumns.push(
         <div key={ i } className="hint-column">
@@ -94,7 +100,7 @@ class Level extends React.Component {
     return (
       <div>
         <AppBar 
-          title={ <Timer minutes={ 1 } /> }
+          title={ <Timer seconds={ 5 } onTimeout={ this.onTimeout } /> }
           titleStyle={{ textAlign: 'center' }}
           iconElementLeft={ <IconButton><PauseIcon/></IconButton> }
           iconElementRight={ <IconButton></IconButton> }
@@ -109,13 +115,16 @@ class Level extends React.Component {
           </div>
         </div>
         <Dialog
-          title="Dialog With Actions"
-          actions={[]}
-          modal={true}
-          open={true}
-          onRequestClose={null}
+          title={ this.level.title }
+          actions={ [] }
+          modal={ true }
+          open={ this.state.finished }
+          onRequestClose={ null }
+          titleStyle={{ textAlign: 'center', fontSize: '30px', fontWeight: 'bold' }}
+          contentStyle={{ maxWidth: '300px', margin: 'auto', position: 'absolute', height: '100%', left: '0px', right: '0px', top: '0px', transform: 'translate(0px, 30%)' }}
+          bodyStyle={{ minHeight: '300px' }}
         >
-          The actions in this window were passed in as an array of React objects.
+          <SvgIcon style={{ background: 'url(../resources/icons/beer.svg)', width: '100%', paddingTop: '90%', backgroundSize: 'cover' }}></SvgIcon>
         </Dialog>
       </div>
     );
@@ -126,17 +135,26 @@ class Cell extends React.Component {
 
   constructor(props) {
     super(props);
-    this.leftClick = this.leftClick.bind(this);
-    this.rightClick = this.rightClick.bind(this);
+    this.onLeftClick = this.onLeftClick.bind(this);
+    this.onMouseEnter = this.onMouseEnter.bind(this);
+    this.onRightClick = this.onRightClick.bind(this);
   }
 
-  leftClick() {
+  onLeftClick() {
     this.props.onLeftClick(this.props.x, this.props.y);
   }
 
-  rightClick(evt) {
+  onRightClick(evt) {
     evt.preventDefault();
     this.props.onRightClick(this.props.x, this.props.y);
+  }
+
+  onMouseEnter(evt){
+    if(evt.buttons == 1){
+      this.props.onLeftClick(this.props.x, this.props.y);
+    } else if(evt.buttons == 2){
+      this.props.onRightClick(this.props.x, this.props.y);
+    }
   }
 
   render() {
@@ -151,10 +169,12 @@ class Cell extends React.Component {
     }
 
     return (
-      <div className={ 'cell clickable' } 
-           onClick={ this.leftClick } 
-           onContextMenu={ this.rightClick }>
-        { content }        
+      <div className={ 'cell clickable' }
+           style={{ borderWidth: '2px' }}
+           onClick={ this.onLeftClick }
+           onMouseEnter={ this.onMouseEnter }
+           onContextMenu={ this.onRightClick }>
+        { content }
       </div>
     );
   }
@@ -205,7 +225,7 @@ class Timer extends React.Component {
     super(props);
 
     this.state = {
-      elapsed: this.props.minutes*60000
+      elapsed: this.props.seconds*1000
     };
 
     this.tick = this.tick.bind(this);
@@ -229,6 +249,7 @@ class Timer extends React.Component {
 
   stop(){
     clearInterval(this.timer);
+    this.props.onTimeout();
   }
 
   formatNumber(number){
