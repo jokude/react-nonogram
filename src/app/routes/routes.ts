@@ -1,6 +1,7 @@
-import { Home } from "../modules/home";
-import { Level } from "../modules/level";
-import { Levels } from "../modules/levels";
+import { Home } from "Pages/home";
+import { Level } from "Pages/level";
+import { Levels } from "Pages/levels";
+import { NotFound } from "Pages/notFound";
 
 export const routes = [
   {
@@ -15,5 +16,9 @@ export const routes = [
   {
     component: Levels,
     path: "/category/:categoryId",
+  },
+  {
+    component: NotFound,
+    path: "*",
   },
 ];
