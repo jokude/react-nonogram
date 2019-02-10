@@ -5,7 +5,7 @@ export interface IProps {
   onClick: () => void;
 }
 
-export const Home: React.SFC<IProps> = ({ onClick }) => (
+export const Home: React.FunctionComponent<IProps> = ({ onClick }) => (
   <div
     style={{ height: "100%", width: "100%", background: "red" }}
     onClick={onClick}

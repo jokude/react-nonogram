@@ -10,7 +10,7 @@ const Container = styled.div`
   height: 100%;
 `;
 
-export const App: React.SFC = () => (
+export const App: React.FunctionComponent = () => (
   <ThemeProvider theme={theme}>
     <Container>
       <MainRoutes />

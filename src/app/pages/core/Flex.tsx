@@ -6,7 +6,7 @@ interface IProps {
   isColumn?: boolean;
 }
 
-const StyledFlex: React.SFC<IProps> = ({ className, children }) => (
+const StyledFlex: React.FunctionComponent<IProps> = ({ className, children }) => (
   <div className={className}>{children}</div>
 );
 
