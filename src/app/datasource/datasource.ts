@@ -1,3 +1,4 @@
+import { ICategory } from "Types/Category";
 import categories from "./gameData";
 
 const chunkArray = (array: any[], chunkSize: number) => {
@@ -13,6 +14,8 @@ const chunkArray = (array: any[], chunkSize: number) => {
 
 export const getCategories = () => categories;
 
+export const getCategoryNames = () => categories.map((category: ICategory) => category.title);
+
 export const getCategory = (title: string) =>
   categories.find((category) => category.title === title);
 
@@ -27,3 +30,5 @@ export const getLevel = (categoryId: string, levelId: string) => {
     title: level.title,
   };
 };
+
+export const transformName = (name: string): string => name.replace(/\s/g, "-").toLocaleLowerCase();
