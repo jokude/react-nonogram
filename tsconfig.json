@@ -13,11 +13,12 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "experimentalDecorators": true,
+    "downlevelIteration": true,
     "paths": {
       "Lib/*": ["src/app/lib/*"],
-      "Modules/*": ["src/app/modules/*"],
+      "Pages/*": ["src/app/pages/*"],
       "Types/*": ["src/app/types/*"]
     }
   },
-  "exclude": ["node_modules", "build", "test"]
+  "exclude": ["node_modules", "build"]
 }
