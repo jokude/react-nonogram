@@ -8,6 +8,8 @@ const Container = styled.div`
   max-height: 800px;
   margin: auto;
   height: 100%;
+  display: flex;
+  justify-content: center;
 `;
 
 export const App: React.FunctionComponent = () => (

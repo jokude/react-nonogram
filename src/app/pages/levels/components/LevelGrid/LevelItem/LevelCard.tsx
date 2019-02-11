@@ -27,7 +27,7 @@ const Container = styled(Link)`
 `;
 
 export const LevelCard: React.FunctionComponent<IProps> = ({ category, level, children }) => (
-  <Container to={`/category/${category.title}/level/${transformName(level.title)}}`}>
+  <Container to={`/category/${category.title}/level/${transformName(level.title)}`}>
     {children}
   </Container>
 );
