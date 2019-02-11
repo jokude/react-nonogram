@@ -1,9 +1,10 @@
 import { ICategory } from "Types/Category";
-import categories from "./gameData";
+import { ILevel } from "Types/Level";
+import gameData from "./gameData";
 
-const chunkArray = (array: any[], chunkSize: number) => {
+const chunkArray = <T>(array: T[], chunkSize: number): T[][] => {
   const arrayCopy = array.slice(0);
-  const result = [];
+  const result = [] as T[][];
 
   while (arrayCopy.length) {
     result.push(arrayCopy.splice(0, chunkSize));
@@ -12,23 +13,32 @@ const chunkArray = (array: any[], chunkSize: number) => {
   return result;
 };
 
-export const getCategories = () => categories;
+const parseCategory = (category: any): ICategory => ({
+  levels: category.levels.map((level: any) => parseLevel(level, category.size)),
+  size: category.size,
+  title: category.title,
+});
 
-export const getCategoryNames = () => categories.map((category: ICategory) => category.title);
+const parseLevel = ({ grid, title }: { grid: string, title: string }, size: number): ILevel => ({
+  grid: chunkArray(
+    grid.split("").map(Boolean),
+    size,
+  ),
+  title,
+});
 
-export const getCategory = (title: string) =>
-  categories.find((category) => category.title === title);
+export const getCategoryNames = (): string[] => gameData.map((category) => category.title);
+
+export const getCategory = (title: string): ICategory => {
+  const category = gameData.find((categoryData: any) => categoryData.title === title);
+  return parseCategory(category);
+};
+
+export const getCategories = (): ICategory[] => gameData.map(parseCategory);
 
 export const getLevel = (categoryId: string, levelId: string) => {
   const category = getCategory(categoryId);
-  const level = category.levels.find((level2) => level2.title === levelId);
-  return {
-    grid: chunkArray(
-      level.grid.split("").map((value) => value === "0"),
-      category.size,
-    ),
-    title: level.title,
-  };
+  return category.levels.find((level2) => level2.title === levelId);
 };
 
 export const transformName = (name: string): string => name.replace(/\s/g, "-").toLocaleLowerCase();
