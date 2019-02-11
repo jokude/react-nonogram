@@ -1,4 +1,4 @@
 export interface ILevel {
   title: string;
-  grid: string;
+  grid: boolean[][];
 }
