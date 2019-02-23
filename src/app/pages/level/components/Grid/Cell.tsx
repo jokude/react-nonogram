@@ -15,11 +15,12 @@ const getStatusStyle = (status: CellStatus): string => {
         &:after {
           transform: scale(1);
           background-color: #967AA1;
-          border-radius: 2px;
+          border-radius: inherit;
         }
       `;
     case CellStatus.Failed:
       return `
+        border-width: 0;
         &:after {
           background-image: url('/assets/svg/grid/failed.svg');
           background-repeat: no-repeat;
@@ -31,6 +32,7 @@ const getStatusStyle = (status: CellStatus): string => {
       `;
     case CellStatus.Marked:
       return `
+        border-width: 0;
         &:after {
           background-image: url('/assets/svg/grid/marked.svg');
           background-repeat: no-repeat;
@@ -56,12 +58,13 @@ const getStatusStyle = (status: CellStatus): string => {
 
 const Container = styled.div<{ status: CellStatus }>`
   background-color: white;
-  border: 2px solid #AAA1C8;
+  border: 2px solid #B9B2D2;
   border-radius: 2px;
-  padding: 4px;
+  padding: 2px;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: border-width 0.2s ease;
 
   &:after {
     content: '';
