@@ -21,7 +21,7 @@ const parseCategory = (category: any): ICategory => ({
 
 const parseLevel = ({ grid, title }: { grid: string, title: string }, size: number): ILevel => ({
   grid: chunkArray(
-    grid.split("").map(Boolean),
+    grid.split("").map((solution: string) => Boolean(parseInt(solution, 2))),
     size,
   ),
   title,
