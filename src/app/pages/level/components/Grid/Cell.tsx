@@ -12,31 +12,71 @@ const getStatusStyle = (status: CellStatus): string => {
   switch (status) {
     case CellStatus.Solved:
       return `
-        background-color: black;
+        &:after {
+          transform: scale(1);
+          background-color: #967AA1;
+          border-radius: 2px;
+        }
       `;
     case CellStatus.Failed:
       return `
-        background-color: red;
+        &:after {
+          background-image: url('/assets/svg/grid/failed.svg');
+          background-repeat: no-repeat;
+          background-size: contain;
+          transform: scale(1);
+          width: 90%;
+          height: 90%;
+        }
       `;
     case CellStatus.Marked:
       return `
-        background-color: grey;
+        &:after {
+          background-image: url('/assets/svg/grid/marked.svg');
+          background-repeat: no-repeat;
+          background-size: contain;
+          transform: scale(1);
+          width: 90%;
+          height: 90%;
+        }
       `;
     case CellStatus.Empty:
       return `
-        background-color: white;
+        &:after {
+          background-color: white;
+          background-image: url('/assets/svg/grid/marked.svg');
+          background-repeat: no-repeat;
+          background-size: contain;
+          width: 90%;
+          height: 90%;
+        }
       `;
   }
 };
 
 const Container = styled.div<{ status: CellStatus }>`
   background-color: white;
-  border: 1px solid black;
-  ${({ status }) => getStatusStyle(status)};
+  border: 2px solid #AAA1C8;
+  border-radius: 2px;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    display: block;
+    transform: scale(0);
+    transition: transform 0.3s ease;
+  }
 
   &:hover {
     cursor: pointer;
   }
+
+  ${({ status }) => getStatusStyle(status)};
 `;
 
 const onContextMenuHandler = (callback: () => void) => (evt: React.MouseEvent<HTMLElement>) => {

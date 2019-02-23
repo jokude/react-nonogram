@@ -13,7 +13,7 @@ const Wrapper = styled.div`
 
 const Grid = styled.div`
   display: grid;
-  grid-gap: 10px;
+  grid-gap: 2px;
   grid-template-columns: repeat(6, 1fr);
 `;
 
