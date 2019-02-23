@@ -5,7 +5,7 @@ export default [
     levels: [
       {
         title: "Battery",
-        grid: "1101110001100010000011011",
+        grid: "0101010001100011000111111",
       },
       {
         title: "Bell",
