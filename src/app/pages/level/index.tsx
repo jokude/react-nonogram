@@ -6,13 +6,15 @@ import { GameStateProvider } from "./components/GameContext";
 import { Grid } from "./components/Grid";
 import { HorizontalHints, VerticalHints } from "./components/Hints";
 
+const onContextMenuHandler = (evt: React.MouseEvent<HTMLElement>) => evt.preventDefault();
+
 export const Level: React.SFC<RouteChildrenProps<{ categoryId: string, levelId: string }>> =
  ({ match: { params: { categoryId, levelId } } }) => {
   const category = getCategory(categoryId);
   const categoryLevel = category.levels.find((level: ILevel) => transformName(level.title) === levelId);
   return (
     <GameStateProvider size={category.size} level={categoryLevel.grid}>
-      <div style={{ userSelect: "none" }}>
+      <div style={{ userSelect: "none" }} onContextMenu={onContextMenuHandler}>
         <VerticalHints size={category.size} level={categoryLevel.grid} />
         <div style={{ display: "flex" }}>
           <HorizontalHints size={category.size} level={categoryLevel.grid} />
