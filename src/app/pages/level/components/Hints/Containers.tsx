@@ -23,8 +23,13 @@ export const Row = styled.div<ContainerProps & { total: number }>`
   `};
 `;
 
-export const Cell = styled.div`
+export const Cell = styled.div<{ solved: boolean, highlight: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
+  font-weight: 500;
+  font-size: 16px;
+  transition: color 0.2s ease;
+
+  color: ${({ solved, highlight }) => solved ? "lightgrey" : (highlight ? "#E76D83" : "#6987C9")};
 `;

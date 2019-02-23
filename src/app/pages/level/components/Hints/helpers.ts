@@ -11,13 +11,13 @@ export const buildHints = (cellLine: boolean[]): IHintCell[] => {
     if (cellLine[i]) {
       count++;
     } else if (count > 0) {
-      hints.push({ total: count, startPosition: i });
+      hints.push({ total: count, startPosition: i - count });
       count = 0;
     }
   }
 
   if (count !== 0 || hints.length === 0) {
-    hints.push({ total: count, startPosition: i });
+    hints.push({ total: count, startPosition: i - count });
   }
 
   return hints;
