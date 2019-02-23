@@ -7,7 +7,6 @@ interface IActiveProps extends RouteChildrenProps<{ categoryId: string }> {
 }
 
 const ActiveContainer = styled.div`
-  margin: 10px;
   pointer-events: none;
   position: absolute;
   left: 0;
@@ -22,13 +21,11 @@ const ActiveBackground = styled.div<{ position: number }>`
   ${({ theme, position }) => `
     color: ${theme.colors.black};
     background: ${theme.colors.white};
-    display: flex;
-    justify-content: center;
-    align-items: center;
     transition: all 1s ease;
     transform: translateX(${position * 100}%);
     mix-blend-mode: difference;
-    border-radius: 4px;
+    border-radius: 14px;
+    border: 10px solid black;
   `}
 `;
 

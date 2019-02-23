@@ -4,7 +4,7 @@ import { MainRoutes } from "./routes";
 import { theme } from "./theme";
 
 const Container = styled.div`
-  max-width: 640px;
+  max-width: 700px;
   max-height: 800px;
   margin: auto;
   height: 100%;

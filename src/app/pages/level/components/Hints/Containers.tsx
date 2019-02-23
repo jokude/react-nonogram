@@ -11,7 +11,10 @@ export const Container = styled.div<ContainerProps>`
   ${({ size, flow }) => `
     grid-template-${isHorizontal(flow) ? "row" : "column"}s: repeat(${size}, ${getCellPixelSize(size)}px);
 
-    ${isHorizontal(flow) ? "justify-items: end;" : "align-self: flex-end; align-items: flex-end;"};
+    ${isHorizontal(flow) ?
+      "justify-items: end;" :
+      "align-self: flex-end; align-items: flex-end; justify-content: end;"
+    };
   `};
 `;
 

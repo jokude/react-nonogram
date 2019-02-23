@@ -12,9 +12,9 @@ export const Level: React.SFC<RouteChildrenProps<{ categoryId: string, levelId: 
   const categoryLevel = category.levels.find((level: ILevel) => transformName(level.title) === levelId);
   return (
     <GameStateProvider size={category.size} level={categoryLevel.grid}>
-      <div style={{ display: "flex", flexDirection: "column" }}>
+      <div style={{ userSelect: "none" }}>
         <VerticalHints size={category.size} level={categoryLevel.grid} />
-        <div style={{ display: "flex", flexDirection: "row" }}>
+        <div style={{ display: "flex" }}>
           <HorizontalHints size={category.size} level={categoryLevel.grid} />
           <Grid size={category.size} />
         </div>

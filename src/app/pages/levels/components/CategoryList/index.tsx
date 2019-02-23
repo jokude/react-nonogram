@@ -10,6 +10,14 @@ const Container = styled.div`
   position: relative;
   border: 2px solid black;
   border-radius: 4px;
+
+  @media only screen and (max-width: 600px) {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 0;
+  }
 `;
 
 interface IProps {
