@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { GRID_GAP } from "../constants";
 import { getCellPixelSize, isHorizontal } from "./helpers";
 import { IHintsProps } from "./types";
 
@@ -6,7 +7,7 @@ type ContainerProps = Pick<IHintsProps, "size" | "flow">;
 
 export const Container = styled.div<ContainerProps>`
   display: grid;
-  grid-gap: 10px;
+  grid-gap: ${GRID_GAP}px;
 
   ${({ size, flow }) => `
     grid-template-${isHorizontal(flow) ? "row" : "column"}s: repeat(${size}, ${getCellPixelSize(size)}px);

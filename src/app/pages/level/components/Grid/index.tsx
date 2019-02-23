@@ -2,6 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import { ICategory } from "Types/Category";
 import { CellStatus } from "Types/CellStatus";
+import { GRID_GAP } from "../constants";
 import { GameContext } from "../GameContext";
 import { Cell } from "./Cell";
 
@@ -29,7 +30,7 @@ const getGridTemplate = (size: IProps["size"]) => {
 
 const Container = styled.div<{ size: IProps["size"] }>`
   display: grid;
-  grid-gap: 10px;
+  grid-gap: ${GRID_GAP}px;
   grid-template: ${({ size }) => getGridTemplate(size)};
 `;
 
