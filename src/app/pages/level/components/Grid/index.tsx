@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import { ICategory } from "Types/Category";
 import { CellStatus } from "Types/CellStatus";
-import { GameStateConsumer } from "../GameContext";
+import { GameContext } from "../GameContext";
 import { Cell } from "./Cell";
 
 interface IProps {
@@ -36,10 +36,11 @@ const Container = styled.div<{ size: IProps["size"] }>`
 const clickHandler = (clickCallback: (row: number, column: number) => void, row: number, column: number) =>
   () => clickCallback(row, column);
 
-export const Grid: React.FunctionComponent<IProps> = ({ size }) => (
-  <Container size={size}>
-    <GameStateConsumer>
-      {({ grid, paintCell, markCell }) => grid.map((_, row: number) => _.map(
+export const Grid: React.FunctionComponent<IProps> = ({ size }) => {
+  const { grid, paintCell, markCell } = React.useContext(GameContext);
+  return (
+    <Container size={size}>
+      {grid.map((_, row: number) => _.map(
         (status: CellStatus, column: number) => (
           <Cell
             key={`${row}-${column}`}
@@ -49,6 +50,6 @@ export const Grid: React.FunctionComponent<IProps> = ({ size }) => (
           />
         ),
       ))}
-    </GameStateConsumer>
-  </Container>
-);
+    </Container>
+  );
+};
