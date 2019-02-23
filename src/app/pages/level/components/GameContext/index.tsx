@@ -1,33 +1,9 @@
 import * as React from "react";
 import { CellStatus } from "Types/CellStatus";
-import { ILevel } from "Types/Level";
+import { CellAction, Grid, IAction, IGameProviderChildrenProps, IGameProviderProps } from "./types";
 
-export interface IGameProviderChildrenProps {
-  grid: Grid;
-  paintCell: (row: number, column: number) => void;
-  markCell: (row: number, column: number) => void;
-}
-
-type Grid = CellStatus[][];
-
-interface IGameProviderProps {
-  level: ILevel["grid"];
-  size: number;
-}
-
-interface IAction {
-  type: CellAction;
-  row: number;
-  column: number;
-  level: ILevel["grid"];
-}
-
-enum CellAction {
-  PaintCell,
-  MarkCell,
-}
-
-const { Provider, Consumer } = React.createContext<IGameProviderChildrenProps>(undefined);
+const GameContext = React.createContext<IGameProviderChildrenProps>(undefined);
+const { Provider, Consumer } = GameContext;
 
 const getInitialGrid = (size: number): Grid =>
   [...Array(size).keys()].map((_) => [...Array(size).keys()].map((__) => CellStatus.Empty));
@@ -72,9 +48,9 @@ const getModifiedGrid = (grid: Grid, cellRow: number, cellColumn: number, cellSt
   return newGrid;
 };
 
-export const GameStateConsumer = Consumer;
+const GameStateConsumer = Consumer;
 
-export const GameStateProvider: React.FunctionComponent<IGameProviderProps> = ({ size, level, children }) => {
+const GameStateProvider: React.FunctionComponent<IGameProviderProps> = ({ size, level, children }) => {
 
   const [state, dispatch] = React.useReducer(reducer, getInitialGrid(size));
 
@@ -92,3 +68,5 @@ export const GameStateProvider: React.FunctionComponent<IGameProviderProps> = ({
     </Provider>
   );
 };
+
+export { GameContext, GameStateConsumer, GameStateProvider };
