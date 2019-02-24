@@ -5,9 +5,8 @@ const Container = styled.div`
   background: black;
   padding: 20px;
   color: white;
-  font-size: 20px;
 `;
 
-const Topbar = () => <Container>React Nonogram</Container>;
+const Topbar: React.FunctionComponent = ({ children }) => <Container>{children}</Container>;
 
-export default Topbar;
+export { Topbar };
