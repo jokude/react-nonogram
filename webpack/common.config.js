@@ -1,9 +1,7 @@
 const path = require("path");
-const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const getAliases = require("./aliases");
 
-const GAME_ROOT = "root";
 const resolve = location => path.resolve(__dirname, location);
 
 module.exports = {
@@ -16,15 +14,6 @@ module.exports = {
   output: {
     path: resolve("../build"),
     publicPath: "/"
-  },
-
-  module: {
-    rules: [
-      {
-        test: /\.tsx?$/,
-        loader: "ts-loader"
-      }
-    ]
   },
 
   resolve: {

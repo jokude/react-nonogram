@@ -12,6 +12,14 @@ module.exports = merge(common, {
   output: {
     filename: "bundle.production.js"
   },
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        loader: "ts-loader"
+      }
+    ]
+  },
   plugins: [
     new webpack.DefinePlugin({
       "process.env": {
