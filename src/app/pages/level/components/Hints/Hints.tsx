@@ -10,7 +10,7 @@ export const Hints: React.FunctionComponent<IHintsProps> = ({ level, size, flow 
   return (
     <Container size={size} flow={flow}>
       {hints.map((hint, rowIndex) => (
-        <Row size={size} total={hint.length} flow={flow} key={rowIndex}>
+        <Row total={hint.length} flow={flow} key={rowIndex}>
           {hint.map((cell, cellIndex) => (
             <HintCell isHorizontal={horizontal} rowIndex={rowIndex} key={cellIndex} {...cell} />
           ))}

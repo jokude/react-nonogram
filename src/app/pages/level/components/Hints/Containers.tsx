@@ -4,6 +4,8 @@ import { getCellPixelSize, isHorizontal } from "./helpers";
 import { IHintsProps } from "./types";
 
 type ContainerProps = Pick<IHintsProps, "size" | "flow">;
+type RowProps = Pick<IHintsProps, "flow"> & { total: number };
+interface ICellProps { solved: boolean; highlight: boolean; }
 
 export const Container = styled.div<ContainerProps>`
   display: grid;
@@ -19,15 +21,15 @@ export const Container = styled.div<ContainerProps>`
   `};
 `;
 
-export const Row = styled.div<ContainerProps & { total: number }>`
+export const Row = styled.div<RowProps>`
   display: grid;
 
-  ${({ flow, size, total }) => `
-    grid-template-${isHorizontal(flow) ? "column" : "row"}s: repeat(${total}, ${getCellPixelSize(size)}px)
+  ${({ flow, total }) => `
+    grid-template-${isHorizontal(flow) ? "column" : "row"}s: repeat(${total}, 30px)
   `};
 `;
 
-export const Cell = styled.div<{ solved: boolean, highlight: boolean }>`
+export const Cell = styled.div<ICellProps>`
   display: flex;
   align-items: center;
   justify-content: center;
