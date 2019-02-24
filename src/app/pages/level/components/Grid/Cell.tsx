@@ -44,6 +44,12 @@ const getStatusStyle = (status: CellStatus): string => {
       `;
     case CellStatus.Empty:
       return `
+        &:hover {
+          border-color: #985F99;
+          border-width: 3px;
+          background-color: #F5F0F5;
+        }
+
         &:after {
           background-color: white;
           background-image: url('/assets/svg/grid/marked.svg');
@@ -64,7 +70,7 @@ const Container = styled.div<{ status: CellStatus }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: border-width 0.2s ease;
+  transition: border 0.2s ease, background-color 0.2s ease;
 
   &:after {
     content: '';
