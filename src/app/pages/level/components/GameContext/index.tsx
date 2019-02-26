@@ -1,6 +1,7 @@
 import * as React from "react";
 import { CellStatus } from "Types/CellStatus";
-import { CellAction, Grid, IAction, IGameProviderChildrenProps, IGameProviderProps } from "./types";
+import {
+  CellAction, Grid, IAction, IGameProviderChildrenProps, IGameProviderProps, IPosition } from "./types";
 
 const GameContext = React.createContext<IGameProviderChildrenProps>(undefined);
 const { Provider, Consumer } = GameContext;
@@ -9,12 +10,16 @@ const getInitialGrid = (size: number): Grid =>
   [...Array(size).keys()].map((_) => [...Array(size).keys()].map((__) => CellStatus.Empty));
 
 const reducer = (state: Grid, action: IAction): Grid => {
-  const { row, column, level, type } = action;
+  const { position, level, type } = action;
   switch (type) {
     case CellAction.PaintCell:
-      return getModifiedGrid(state, row, column, paintGridCell(state[row][column], level[row][column]));
+      return getModifiedGrid(
+        state,
+        position,
+        paintGridCell(state[position.row][position.column], level[position.row][position.column]),
+      );
     case CellAction.MarkCell:
-      return getModifiedGrid(state, row, column, markGridCell(state[row][column]));
+      return getModifiedGrid(state, position, markGridCell(state[position.row][position.column]));
     default:
       throw new Error();
   }
@@ -42,9 +47,9 @@ const markGridCell = (currentStatus: CellStatus): CellStatus => {
   }
 };
 
-const getModifiedGrid = (grid: Grid, cellRow: number, cellColumn: number, cellStatus: CellStatus): Grid => {
+const getModifiedGrid = (grid: Grid, position: IPosition, cellStatus: CellStatus): Grid => {
   const newGrid = grid.slice(0);
-  newGrid[cellRow][cellColumn] = cellStatus;
+  newGrid[position.row][position.column] = cellStatus;
   return newGrid;
 };
 
@@ -54,12 +59,12 @@ const GameStateProvider: React.FunctionComponent<IGameProviderProps> = ({ size, 
 
   const [state, dispatch] = React.useReducer(reducer, getInitialGrid(size));
 
-  const paintCell = (row: number, column: number) => {
-    dispatch({ type: CellAction.PaintCell, row, column, level });
+  const paintCell = (position: IPosition) => {
+    dispatch({ type: CellAction.PaintCell, position, level });
   };
 
-  const markCell = (row: number, column: number) => {
-    dispatch({ type: CellAction.MarkCell, row, column, level });
+  const markCell = (position: IPosition) => {
+    dispatch({ type: CellAction.MarkCell, position, level });
   };
 
   return (

@@ -4,6 +4,7 @@ import { ICategory } from "Types/Category";
 import { CellStatus } from "Types/CellStatus";
 import { GRID_GAP } from "../constants";
 import { GameContext } from "../GameContext";
+import { IPosition } from "../GameContext/types";
 import { Cell } from "./Cell";
 
 interface IProps {
@@ -34,8 +35,8 @@ const Container = styled.div<{ size: IProps["size"] }>`
   grid-template: ${({ size }) => getGridTemplate(size)};
 `;
 
-const clickHandler = (clickCallback: (row: number, column: number) => void, row: number, column: number) =>
-  () => clickCallback(row, column);
+const clickHandler = (clickCallback: (position: IPosition) => void, position: IPosition) =>
+  () => clickCallback(position);
 
 export const Grid: React.FunctionComponent<IProps> = ({ size }) => {
   const { grid, paintCell, markCell } = React.useContext(GameContext);
@@ -46,8 +47,8 @@ export const Grid: React.FunctionComponent<IProps> = ({ size }) => {
           <Cell
             key={`${row}-${column}`}
             status={status}
-            onClick={clickHandler(paintCell, row, column)}
-            onRightClick={clickHandler(markCell, row, column)}
+            onClick={clickHandler(paintCell, { row, column })}
+            onRightClick={clickHandler(markCell, { row, column })}
           />
         ),
       ))}

@@ -3,10 +3,15 @@ import { ILevel } from "Types/Level";
 
 export type Grid = CellStatus[][];
 
+export interface IPosition {
+  row: number;
+  column: number;
+}
+
 export interface IGameProviderChildrenProps {
   grid: Grid;
-  paintCell: (row: number, column: number) => void;
-  markCell: (row: number, column: number) => void;
+  paintCell: (position: IPosition) => void;
+  markCell: (position: IPosition) => void;
 }
 
 export interface IGameProviderProps {
@@ -16,12 +21,11 @@ export interface IGameProviderProps {
 
 export interface IAction {
   type: CellAction;
-  row: number;
-  column: number;
+  position: IPosition;
   level: ILevel["grid"];
 }
 
 export enum CellAction {
-  PaintCell,
   MarkCell,
+  PaintCell,
 }

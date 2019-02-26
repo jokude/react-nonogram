@@ -102,7 +102,9 @@ const onMouseEnterHandler = (onLeftClick: () => void, onRightClick: () => void) 
     }
   };
 
-export const Cell: React.FunctionComponent<IProps> = ({ status, onClick, onRightClick }) => {
+export const Cell: React.FunctionComponent<IProps> = ({
+  status, onClick, onRightClick,
+}) => {
   return (
     <Container
       status={status}
