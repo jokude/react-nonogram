@@ -2,6 +2,7 @@ export default [
   {
     title: "5x5",
     size: 5,
+    countdownMinutes: 5,
     levels: [
       {
         title: "Battery",
@@ -104,6 +105,7 @@ export default [
   {
     title: "10x10",
     size: 10,
+    countdownMinutes: 10,
     levels: [
       {
         title: "Bench",
@@ -230,6 +232,7 @@ export default [
   {
     title: "15x15",
     size: 15,
+    countdownMinutes: 15,
     levels: [
       {
         title: "Birthday Cake",

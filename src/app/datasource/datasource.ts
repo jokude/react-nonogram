@@ -14,6 +14,7 @@ const chunkArray = <T>(array: T[], chunkSize: number): T[][] => {
 };
 
 const parseCategory = (category: any): ICategory => ({
+  countdownMinutes: category.countdownMinutes,
   levels: category.levels.map((level: any) => parseLevel(level, category.size)),
   size: category.size,
   title: category.title,

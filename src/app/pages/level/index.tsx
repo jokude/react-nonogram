@@ -18,7 +18,7 @@ export const Level: React.FunctionComponent<RouteChildrenProps<{ categoryId: str
     <GameStateProvider size={category.size} level={categoryLevel.grid}>
       <div>
         <Topbar>
-          <Timer countdownSeconds={5} />
+          <Timer countdownSeconds={category.countdownMinutes * 60} />
         </Topbar>
         <div style={{ userSelect: "none" }} onContextMenu={onContextMenuHandler}>
           <VerticalHints size={category.size} level={categoryLevel.grid} />
