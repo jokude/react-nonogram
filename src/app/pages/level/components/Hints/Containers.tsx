@@ -4,7 +4,7 @@ import { getCellPixelSize, isHorizontal } from "./helpers";
 import { IHintsProps } from "./types";
 
 type ContainerProps = Pick<IHintsProps, "size" | "flow">;
-type RowProps = Pick<IHintsProps, "flow"> & { total: number };
+type RowProps = Pick<IHintsProps, "flow"> & { total: number, highlighted: boolean };
 interface ICellProps { solved: boolean; highlight: boolean; }
 
 export const Container = styled.div<ContainerProps>`
@@ -15,17 +15,20 @@ export const Container = styled.div<ContainerProps>`
     grid-template-${isHorizontal(flow) ? "row" : "column"}s: repeat(${size}, ${getCellPixelSize(size)}px);
 
     ${isHorizontal(flow) ?
-      "justify-items: end;" :
-      "align-self: flex-end; align-items: flex-end; justify-content: end;"
+      "justify-items: end; margin-right: 5px;" :
+      "align-self: flex-end; align-items: flex-end; justify-content: end; margin: 5px 0;"
     };
   `};
 `;
 
 export const Row = styled.div<RowProps>`
   display: grid;
+  border-radius: 4px;
+  transition: background-color 0.5s ease;
 
-  ${({ flow, total }) => `
-    grid-template-${isHorizontal(flow) ? "column" : "row"}s: repeat(${total}, 30px)
+  ${({ flow, total, highlighted }) => `
+    grid-template-${isHorizontal(flow) ? "column" : "row"}s: repeat(${total}, 30px);
+    background-color: ${highlighted ? "rgba(243, 206, 224, 0.5)" : "white"};
   `};
 `;
 

@@ -1,7 +1,8 @@
 import * as React from "react";
 import { HintCell } from "./Cell";
-import { Container, Row } from "./Containers";
+import { Container } from "./Containers";
 import { buildHints, isHorizontal, transpose } from "./helpers";
+import { HintRow } from "./Row";
 import { IHintsProps } from "./types";
 
 export const Hints: React.FunctionComponent<IHintsProps> = ({ level, size, flow }) => {
@@ -10,11 +11,11 @@ export const Hints: React.FunctionComponent<IHintsProps> = ({ level, size, flow 
   return (
     <Container size={size} flow={flow}>
       {hints.map((hint, rowIndex) => (
-        <Row total={hint.length} flow={flow} key={rowIndex}>
+        <HintRow total={hint.length} flow={flow} rowIndex={rowIndex} key={rowIndex}>
           {hint.map((cell, cellIndex) => (
             <HintCell isHorizontal={horizontal} rowIndex={rowIndex} key={cellIndex} {...cell} />
           ))}
-        </Row>
+        </HintRow>
       ))}
     </Container>
   );
