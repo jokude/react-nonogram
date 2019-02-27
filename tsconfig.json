@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "lib": ["es5", "es6", "dom"],
+    "module": "commonjs",
+    "target": "es5",
+    "jsx": "react",
+    "newLine": "lf",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "experimentalDecorators": true,
+    "downlevelIteration": true,
+    "paths": {
+      "Lib/*": ["src/app/lib/*"],
+      "Pages/*": ["src/app/pages/*"],
+      "Types/*": ["src/app/types/*"]
+    }
+  },
+  "exclude": ["node_modules", "build"]
+}
