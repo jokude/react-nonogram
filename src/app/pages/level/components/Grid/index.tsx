@@ -4,6 +4,7 @@ import { ICategory } from "Types/Category";
 import { CellStatus } from "Types/CellStatus";
 import { GRID_GAP } from "../constants";
 import { GameContext } from "../GameContext";
+import { HighlightContext } from "../GameContext/highlight";
 import { IPosition } from "../GameContext/types";
 import { Cell } from "./Cell";
 
@@ -40,6 +41,8 @@ const clickHandler = (clickCallback: (position: IPosition) => void, position: IP
 
 export const Grid: React.FunctionComponent<IProps> = ({ size }) => {
   const { grid, paintCell, markCell } = React.useContext(GameContext);
+  const { highlightCell } = React.useContext(HighlightContext);
+
   return (
     <Container size={size}>
       {grid.map((_, row: number) => _.map(
@@ -49,6 +52,8 @@ export const Grid: React.FunctionComponent<IProps> = ({ size }) => {
             status={status}
             onClick={clickHandler(paintCell, { row, column })}
             onRightClick={clickHandler(markCell, { row, column })}
+            onMouseEnter={clickHandler(highlightCell, { row, column })}
+            onMouseLeave={clickHandler(highlightCell, null)}
           />
         ),
       ))}

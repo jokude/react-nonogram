@@ -6,6 +6,8 @@ interface IProps {
   status: CellStatus;
   onClick: () => void;
   onRightClick: () => void;
+  onMouseEnter: () => void;
+  onMouseLeave: () => void;
 }
 
 const getStatusStyle = (status: CellStatus): string => {
@@ -93,8 +95,9 @@ const onContextMenuHandler = (callback: () => void) => (evt: React.MouseEvent<HT
   callback();
 };
 
-const onMouseEnterHandler = (onLeftClick: () => void, onRightClick: () => void) =>
+const onMouseEnterHandler = (onLeftClick: () => void, onRightClick: () => void, onMouseEnter: () => void) =>
   (evt: React.MouseEvent<HTMLElement>) => {
+    onMouseEnter();
     if (evt.buttons === 1) {
       onLeftClick();
     } else if (evt.buttons === 2) {
@@ -103,14 +106,15 @@ const onMouseEnterHandler = (onLeftClick: () => void, onRightClick: () => void) 
   };
 
 export const Cell: React.FunctionComponent<IProps> = ({
-  status, onClick, onRightClick,
+  status, onClick, onRightClick, onMouseEnter, onMouseLeave,
 }) => {
   return (
     <Container
       status={status}
       onClick={onClick}
       onContextMenu={onContextMenuHandler(onRightClick)}
-      onMouseEnter={onMouseEnterHandler(onClick, onRightClick)}
+      onMouseEnter={onMouseEnterHandler(onClick, onRightClick, onMouseEnter)}
+      onMouseLeave={onMouseLeave}
     />
   );
 };
