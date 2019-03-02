@@ -5,6 +5,7 @@ export interface ITimerInput {
 
 export interface ITimerOutput {
   elapsedTime: ITimer;
+  substractMinute: () => void;
 }
 
 export interface ITimer {
