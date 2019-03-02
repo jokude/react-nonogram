@@ -1,10 +1,5 @@
 import * as React from "react";
-import { CellStatus } from "Types/CellStatus";
-import {
-  CellAction, Grid, IAction, IGameProviderChildrenProps, IGameProviderProps, IPosition } from "./types";
-
-const GameContext = React.createContext<IGameProviderChildrenProps>(undefined);
-const { Provider, Consumer } = GameContext;
+import { CellAction, CellStatus, Grid, IAction, IGridInput, IGridOutput, IPosition } from "./types";
 
 const getInitialGrid = (size: number): Grid =>
   [...Array(size).keys()].map((_) => [...Array(size).keys()].map((__) => CellStatus.Empty));
@@ -53,9 +48,7 @@ const getModifiedGrid = (grid: Grid, position: IPosition, cellStatus: CellStatus
   return newGrid;
 };
 
-const GameStateConsumer = Consumer;
-
-const GameStateProvider: React.FunctionComponent<IGameProviderProps> = ({ size, level, children }) => {
+export const useGrid = ({ size, level }: IGridInput): IGridOutput => {
 
   const [state, dispatch] = React.useReducer(reducer, getInitialGrid(size));
 
@@ -67,11 +60,5 @@ const GameStateProvider: React.FunctionComponent<IGameProviderProps> = ({ size, 
     dispatch({ type: CellAction.MarkCell, position, level });
   };
 
-  return (
-    <Provider value={{ grid: state, paintCell, markCell }}>
-      {children}
-    </Provider>
-  );
+  return { grid: state, paintCell, markCell };
 };
-
-export { GameContext, GameStateConsumer, GameStateProvider };

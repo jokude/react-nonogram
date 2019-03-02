@@ -1,7 +1,7 @@
 import * as React from "react";
 import { CellStatus } from "Types/CellStatus";
-import { GameContext } from "../GameContext";
-import { Grid } from "../GameContext/types";
+import { GameContext } from "../../context";
+import { Grid } from "../../context/types";
 import { Cell } from "./Containers";
 import { IHintCell } from "./types";
 

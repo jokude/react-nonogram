@@ -2,10 +2,9 @@ import * as React from "react";
 import styled from "styled-components";
 import { ICategory } from "Types/Category";
 import { CellStatus } from "Types/CellStatus";
+import { GameContext } from "../../context";
+import { IPosition } from "../../context/types";
 import { GRID_GAP } from "../constants";
-import { GameContext } from "../GameContext";
-import { HighlightContext } from "../GameContext/highlight";
-import { IPosition } from "../GameContext/types";
 import { Cell } from "./Cell";
 
 interface IProps {
@@ -40,8 +39,7 @@ const clickHandler = (clickCallback: (position: IPosition) => void, position: IP
   () => clickCallback(position);
 
 export const Grid: React.FunctionComponent<IProps> = ({ size }) => {
-  const { grid, paintCell, markCell } = React.useContext(GameContext);
-  const { highlightCell } = React.useContext(HighlightContext);
+  const { grid, paintCell, markCell, highlightCell } = React.useContext(GameContext);
 
   return (
     <Container size={size}>

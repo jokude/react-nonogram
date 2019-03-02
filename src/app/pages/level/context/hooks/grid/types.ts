@@ -1,20 +1,16 @@
 import { CellStatus } from "Types/CellStatus";
 import { ILevel } from "Types/Level";
+import { IPosition } from "../../types";
 
 export type Grid = CellStatus[][];
 
-export interface IPosition {
-  row: number;
-  column: number;
-}
-
-export interface IGameProviderChildrenProps {
+export interface IGridOutput {
   grid: Grid;
   paintCell: (position: IPosition) => void;
   markCell: (position: IPosition) => void;
 }
 
-export interface IGameProviderProps {
+export interface IGridInput {
   level: ILevel["grid"];
   size: number;
 }
@@ -29,3 +25,5 @@ export enum CellAction {
   MarkCell,
   PaintCell,
 }
+
+export { CellStatus, ILevel, IPosition };

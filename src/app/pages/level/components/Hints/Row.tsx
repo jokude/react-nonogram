@@ -1,6 +1,6 @@
 import * as React from "react";
-import { HighlightContext } from "../GameContext/highlight";
-import { IPosition } from "../GameContext/types";
+import { GameContext } from "../../context";
+import { IPosition } from "../../context/types";
 import { Row } from "./Containers";
 import { HintsFlow } from "./types";
 
@@ -18,7 +18,7 @@ const isHighlighted = (position: IPosition, flow: HintsFlow, rowIndex: number) =
 };
 
 export const HintRow: React.FunctionComponent<IRowProps> = ({ total, rowIndex, flow, children }) => {
-   const { highlightedCell } = React.useContext(HighlightContext);
+   const { highlightedCell } = React.useContext(GameContext);
    return (
     <Row total={total} flow={flow} highlighted={isHighlighted(highlightedCell, flow, rowIndex)}>
       {children}
