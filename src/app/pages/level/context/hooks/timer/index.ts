@@ -19,17 +19,17 @@ const formatMilliseconds = (value: number): ITimer => {
 };
 
 const getTimer = (setElapsed: React.Dispatch<React.SetStateAction<number>>, onTimeout: () => void): number => {
-  const tempTimer = setInterval(() => {
+  const newTimer = setInterval(() => {
     setElapsed((remainingTime) => {
       if (remainingTime <= 0) {
-        clearInterval(tempTimer);
+        clearInterval(newTimer);
         onTimeout();
         return null;
       }
       return remainingTime - ONE_SECOND;
     });
   }, ONE_SECOND);
-  return tempTimer;
+  return newTimer;
 };
 
 const substractTime = (

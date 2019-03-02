@@ -12,11 +12,11 @@ const GameStateConsumer = Consumer;
 const GameStateProvider: React.FunctionComponent<IContextProviderProps> = ({
   countdownSeconds, onTimeout, size, level, children,
 }) => {
-  const grid = useGrid({ size, level });
+  const { elapsedTime, substractMinute } = useCountdownTimer({ countdownSeconds, onTimeout });
+  const grid = useGrid({ size, level, substractMinute });
   const hints = useHintHightlighter();
-  const timer = useCountdownTimer({ countdownSeconds, onTimeout });
   return (
-    <Provider value={{ ...grid, ...hints, ...timer }}>
+    <Provider value={{ ...grid, ...hints, elapsedTime }}>
       {children}
     </Provider>
   );

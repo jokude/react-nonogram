@@ -10,5 +10,5 @@ export interface IPosition {
   column: number;
 }
 
-export type IContextProviderChildrenProps = IGridOutput & ITimerOutput & IHintOutput;
-export type IContextProviderProps = IGridInput & ITimerInput;
+export type IContextProviderChildrenProps = IGridOutput & Pick<ITimerOutput, "elapsedTime"> & IHintOutput;
+export type IContextProviderProps = Pick<IGridInput, Exclude<keyof IGridInput, "substractMinute">> & ITimerInput;

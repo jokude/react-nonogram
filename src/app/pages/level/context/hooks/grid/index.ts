@@ -11,7 +11,9 @@ const reducer = (state: Grid, action: IAction): Grid => {
       return getModifiedGrid(
         state,
         position,
-        paintGridCell(state[position.row][position.column], level[position.row][position.column]),
+        paintGridCell(
+          state[position.row][position.column], level[position.row][position.column], action.substractMinute,
+        ),
       );
     case CellAction.MarkCell:
       return getModifiedGrid(state, position, markGridCell(state[position.row][position.column]));
@@ -20,9 +22,12 @@ const reducer = (state: Grid, action: IAction): Grid => {
   }
 };
 
-const paintGridCell = (currentStatus: CellStatus, solution: boolean): CellStatus => {
+const paintGridCell = (currentStatus: CellStatus, solution: boolean, substractMinute: () => void): CellStatus => {
   switch (currentStatus) {
     case CellStatus.Empty:
+      if (!solution) {
+        substractMinute();
+      }
       return solution ? CellStatus.Solved : CellStatus.Failed;
     case CellStatus.Marked:
       return CellStatus.Empty;
@@ -48,16 +53,16 @@ const getModifiedGrid = (grid: Grid, position: IPosition, cellStatus: CellStatus
   return newGrid;
 };
 
-export const useGrid = ({ size, level }: IGridInput): IGridOutput => {
+export const useGrid = ({ size, level, substractMinute }: IGridInput): IGridOutput => {
 
   const [state, dispatch] = React.useReducer(reducer, getInitialGrid(size));
 
   const paintCell = (position: IPosition) => {
-    dispatch({ type: CellAction.PaintCell, position, level });
+    dispatch({ type: CellAction.PaintCell, position, level, substractMinute });
   };
 
   const markCell = (position: IPosition) => {
-    dispatch({ type: CellAction.MarkCell, position, level });
+    dispatch({ type: CellAction.MarkCell, position, level, substractMinute });
   };
 
   return { grid: state, paintCell, markCell };
