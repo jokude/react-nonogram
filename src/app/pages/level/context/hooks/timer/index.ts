@@ -18,33 +18,9 @@ const formatMilliseconds = (value: number): ITimer => {
   };
 };
 
-const getTimer = (setElapsed: React.Dispatch<React.SetStateAction<number>>, onTimeout: () => void): number => {
-  const newTimer = setInterval(() => {
-    setElapsed((remainingTime) => {
-      if (remainingTime <= 0) {
-        clearInterval(newTimer);
-        onTimeout();
-        return null;
-      }
-      return remainingTime - ONE_SECOND;
-    });
-  }, ONE_SECOND);
+const getTimer = (callback: () => void): number => {
+  const newTimer = setInterval(callback, ONE_SECOND);
   return newTimer;
-};
-
-const substractTime = (
-    setTimer: React.Dispatch<React.SetStateAction<number>>,
-    setElapsed: React.Dispatch<React.SetStateAction<number>>,
-    timer: number,
-    elapsed: number,
-    onTimeout: () => void,
-  ) => () => {
-  clearInterval(timer);
-  if (elapsed > ONE_MINUTE) {
-    setElapsed(elapsed - ONE_MINUTE);
-  }
-  const newTimer = getTimer(setElapsed, onTimeout);
-  setTimer(newTimer);
 };
 
 const useCountdownTimer = ({ countdownSeconds, onTimeout }: ITimerInput): ITimerOutput => {
@@ -52,14 +28,34 @@ const useCountdownTimer = ({ countdownSeconds, onTimeout }: ITimerInput): ITimer
   const [elapsed, setElapsed] = React.useState<number>(countdownSeconds * ONE_SECOND);
   const [timer, setTimer] = React.useState<number>(null);
 
+  const callback = () => {
+    setElapsed((remainingTime) => {
+      if (remainingTime <= 0) {
+        clearInterval(timer);
+        onTimeout();
+        return null;
+      }
+      return remainingTime - ONE_SECOND;
+    });
+  };
+
+  const substractTime = () => {
+    clearInterval(timer);
+    if (elapsed > ONE_MINUTE) {
+      setElapsed(elapsed - ONE_MINUTE);
+    }
+    const newTimer = getTimer(callback);
+    setTimer(newTimer);
+  };
+
   React.useEffect(() => {
-    setTimer(getTimer(setElapsed, onTimeout));
+    setTimer(getTimer(callback));
     return () => clearInterval(timer);
   }, []);
 
   return {
     elapsedTime: formatMilliseconds(elapsed),
-    substractMinute: substractTime(setTimer, setElapsed, timer, elapsed, onTimeout),
+    substractMinute: substractTime,
   };
 };
 
