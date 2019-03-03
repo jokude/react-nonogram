@@ -28,7 +28,7 @@ module.exports = merge(common, {
     }),
     new CopyWebpackPlugin([
       {
-        from: resolve("../assets"),
+        from: resolve("../src/assets"),
         to: resolve("../build/assets")
       }
     ])

@@ -35,7 +35,7 @@ module.exports = merge(common, {
     publicPath: "/",
     historyApiFallback: true,
     before: function(app) {
-      const assetsPath = path.resolve(__dirname, "../assets");
+      const assetsPath = path.resolve(__dirname, "../src/assets");
       app.use("/assets", express.static(assetsPath));
     }
   }
