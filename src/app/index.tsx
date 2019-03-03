@@ -1,21 +1,13 @@
-import { styled, ThemeProvider } from "Lib/styledComponents";
+import { ThemeProvider } from "Lib/styledComponents";
 import * as React from "react";
+import { MainLayout } from "./pages/core/MainLayout";
 import { MainRoutes } from "./routes";
 import { theme } from "./theme";
 
-const Container = styled.div`
-  max-width: 700px;
-  max-height: 800px;
-  margin: auto;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-`;
-
 export const App: React.FunctionComponent = () => (
   <ThemeProvider theme={theme}>
-    <Container>
+    <MainLayout>
       <MainRoutes />
-    </Container>
+    </MainLayout>
   </ThemeProvider>
 );
