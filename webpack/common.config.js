@@ -1,4 +1,5 @@
 const path = require("path");
+const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const getAliases = require("./aliases");
 
@@ -13,7 +14,7 @@ module.exports = {
 
   output: {
     path: resolve("../build"),
-    publicPath: "/"
+    publicPath: process.env.PUBLIC_PATH || '/'
   },
 
   resolve: {
@@ -22,6 +23,10 @@ module.exports = {
   },
 
   plugins: [
+    new webpack.DefinePlugin({
+      BASE_PATH: JSON.stringify(process.env.PUBLIC_PATH || '/'),
+      USE_HASH_ROUTER: Boolean(process.env.USE_HASH_ROUTER)
+    }),
     new HtmlWebpackPlugin({
       template: resolve("../src/html/template.html"),
       minify: {

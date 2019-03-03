@@ -1,6 +1,6 @@
 import * as React from "react";
 
-const baseUrl = "/assets/svg/";
+const baseUrl = `${BASE_PATH}assets/svg/`;
 
 interface IProps {
   path: string;

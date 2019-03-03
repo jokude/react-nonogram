@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --config webpack/production.config.js",
+    "clean": "rm -rf build",
+    "deploy-gh-pages": "sh scripts/deploy-gh-pages.sh",
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
     "start": "npm run build && node src/server",
     "start:dev": "webpack-dev-server --config webpack/development.config.js"
