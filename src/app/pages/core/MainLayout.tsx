@@ -21,7 +21,7 @@ const Container = styled.div`
 `;
 
 const Background = styled.div`
-  background-image: url("/assets/background.jpg");
+  background-image: url("${BASE_PATH}assets/background.jpg");
   background-size: cover;
   position: fixed;
   top: 0;
