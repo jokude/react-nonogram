@@ -18,6 +18,12 @@ const Container = styled.div`
   padding: 0 20px;
   border: 10px solid #888098;
   border-radius: 10px;
+  font-family: Prototype;
+
+  @font-face {
+    font-family: Prototype;
+    src: url(${BASE_PATH}assets/fonts/Prototype.ttf);
+  }
 `;
 
 const Background = styled.div`
