@@ -24,7 +24,7 @@ const getStatusStyle = (status: CellStatus): string => {
       return `
         border-width: 0;
         &:after {
-          background-image: url('/assets/svg/grid/failed.svg');
+          background-image: url('${BASE_PATH}assets/svg/grid/failed.svg');
           background-repeat: no-repeat;
           background-size: contain;
           transform: scale(1);
@@ -36,7 +36,7 @@ const getStatusStyle = (status: CellStatus): string => {
       return `
         border-width: 0;
         &:after {
-          background-image: url('/assets/svg/grid/marked.svg');
+          background-image: url('${BASE_PATH}assets/svg/grid/marked.svg');
           background-repeat: no-repeat;
           background-size: contain;
           transform: scale(1);
@@ -54,7 +54,7 @@ const getStatusStyle = (status: CellStatus): string => {
 
         &:after {
           background-color: white;
-          background-image: url('/assets/svg/grid/marked.svg');
+          background-image: url('${BASE_PATH}assets/svg/grid/marked.svg');
           background-repeat: no-repeat;
           background-size: contain;
           width: 90%;
