@@ -10,6 +10,7 @@ const BaseCategoryItem: React.FunctionComponent<IProps> = ({
 }) => (
   <Container
     to={`/category/${title}`}
+    replace={true}
   >
     {title}
   </Container>
