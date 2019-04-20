@@ -2,7 +2,8 @@ import * as React from "react";
 import styled from "styled-components";
 import { ICategory } from "Types/Category";
 import { CellStatus } from "Types/CellStatus";
-import { GameContext } from "../../context";
+import { GridContext } from "../../context/grid";
+import { HintsContext } from "../../context/hints";
 import { IPosition } from "../../context/types";
 import { GRID_GAP } from "../constants";
 import { Cell } from "./Cell";
@@ -29,7 +30,7 @@ const getGridTemplate = (size: IProps["size"]) => {
   return `${template} / ${template}`;
 };
 
-const Container = styled.div<{ size: IProps["size"] }>`
+const Container = styled.div<IProps>`
   display: grid;
   grid-gap: ${GRID_GAP}px;
   grid-template: ${({ size }) => getGridTemplate(size)};
@@ -39,7 +40,8 @@ const clickHandler = (clickCallback: (position: IPosition) => void, position: IP
   () => clickCallback(position);
 
 export const Grid: React.FunctionComponent<IProps> = ({ size }) => {
-  const { grid, paintCell, markCell, highlightCell } = React.useContext(GameContext);
+  const { highlightCell } = React.useContext(HintsContext);
+  const { grid, paintCell, markCell } = React.useContext(GridContext);
 
   return (
     <Container size={size}>

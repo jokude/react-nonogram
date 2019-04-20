@@ -1,7 +1,7 @@
 import * as React from "react";
 import { CellStatus } from "Types/CellStatus";
-import { GameContext } from "../../context";
-import { Grid } from "../../context/types";
+import { GridContext } from "../../context/grid";
+import { Grid } from "../../context/grid/types";
 import { Cell } from "./Containers";
 import { IHintCell } from "./types";
 
@@ -15,7 +15,7 @@ const getRow = (grid: Grid, rowIndex: number) => grid[rowIndex];
 const getColumn = (grid: Grid, columnIndex: number) => grid.map((row) => row[columnIndex]);
 
 export const HintCell: React.FunctionComponent<IHintCellProps> = ({ total, startPosition, isHorizontal, rowIndex }) => {
-  const { grid } = React.useContext(GameContext);
+  const { grid } = React.useContext(GridContext);
   const row = isHorizontal ? getRow(grid, rowIndex) : getColumn(grid, rowIndex);
   const cells = row.slice(startPosition, startPosition + total);
   const isSolved = cellsAreSolved(cells);

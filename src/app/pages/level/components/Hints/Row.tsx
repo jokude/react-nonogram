@@ -1,5 +1,5 @@
 import * as React from "react";
-import { GameContext } from "../../context";
+import { HintsContext } from "../../context/hints";
 import { IPosition } from "../../context/types";
 import { Row } from "./Containers";
 import { HintsFlow } from "./types";
@@ -10,7 +10,7 @@ interface IRowProps {
   flow: HintsFlow;
 }
 
-const isHighlighted = (position: IPosition, flow: HintsFlow, rowIndex: number) => {
+const checkHighlight = (position: IPosition, flow: HintsFlow, rowIndex: number) => {
   if (position === null) {
     return false;
   }
@@ -18,9 +18,10 @@ const isHighlighted = (position: IPosition, flow: HintsFlow, rowIndex: number) =
 };
 
 export const HintRow: React.FunctionComponent<IRowProps> = ({ total, rowIndex, flow, children }) => {
-   const { highlightedCell } = React.useContext(GameContext);
-   return (
-    <Row total={total} flow={flow} highlighted={isHighlighted(highlightedCell, flow, rowIndex)}>
+  const { highlightedCell } = React.useContext(HintsContext);
+  const isHighlighted = checkHighlight(highlightedCell, flow, rowIndex);
+  return (
+    <Row total={total} flow={flow} highlighted={isHighlighted}>
       {children}
     </Row>
   );
