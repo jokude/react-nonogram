@@ -1,5 +1,5 @@
 import * as React from "react";
-import { IPosition } from "../../types";
+import { IPosition } from "../types";
 import { IHintOutput } from "./types";
 
 export const useHintHightlighter = (): IHintOutput => {

@@ -1,22 +1,7 @@
 import * as React from "react";
-import { ITimer, ITimerInput, ITimerOutput } from "./types";
-
-const ONE_SECOND = 1000;
-const ONE_MINUTE = ONE_SECOND * 60;
-
-const formatNumber = (value: number): string => {
-  const prefixZero = value <= 9 ? "0" : "";
-  return `${prefixZero}${value}`;
-};
-
-const formatMilliseconds = (value: number): ITimer => {
-  const minutes = Math.floor(value / ONE_MINUTE);
-  const seconds = Math.floor((value - minutes * ONE_MINUTE) / ONE_SECOND);
-  return {
-    minutes: formatNumber(minutes),
-    seconds: formatNumber(seconds),
-  };
-};
+import { ONE_MINUTE, ONE_SECOND } from "../../../core/timer/constants";
+import { formatMilliseconds } from "../../../core/timer/format";
+import { ITimerInput, ITimerOutput } from "./types";
 
 const getTimer = (callback: () => void): number => {
   const newTimer = setInterval(callback, ONE_SECOND);
@@ -32,7 +17,8 @@ const useCountdownTimer = ({ countdownSeconds, onTimeout }: ITimerInput): ITimer
     setElapsed((remainingTime) => {
       if (remainingTime <= 0) {
         clearInterval(timer);
-        onTimeout();
+        setTimer(null);
+        onTimeout(remainingTime);
         return null;
       }
       return remainingTime - ONE_SECOND;
@@ -55,6 +41,7 @@ const useCountdownTimer = ({ countdownSeconds, onTimeout }: ITimerInput): ITimer
 
   return {
     elapsedTime: formatMilliseconds(elapsed),
+    stopped: timer === null,
     substractMinute: substractTime,
   };
 };

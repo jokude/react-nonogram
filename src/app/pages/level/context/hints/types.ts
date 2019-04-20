@@ -1,4 +1,4 @@
-import { IPosition } from "../../types";
+import { IPosition } from "../types";
 
 export interface IHintOutput {
   highlightedCell: IPosition | null;
