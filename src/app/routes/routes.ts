@@ -1,5 +1,5 @@
 import { Home } from "Pages/home";
-import { Level } from "Pages/level";
+import { LevelPage } from "Pages/level";
 import { Levels } from "Pages/levels";
 import { NotFound } from "Pages/notFound";
 
@@ -10,7 +10,7 @@ export const routes = [
     path: "/",
   },
   {
-    component: Level,
+    component: LevelPage,
     path: "/category/:categoryId/level/:levelId",
   },
   {
