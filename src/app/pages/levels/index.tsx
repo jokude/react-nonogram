@@ -7,7 +7,7 @@ import { LevelGrid } from "./components/LevelGrid";
 export const Levels: React.FunctionComponent<RouteChildrenProps<{ categoryId: string }>> = ({ match }) => {
   const category = getCategory(match.params.categoryId);
   return (
-    <div style={{ width: "100%" }}>
+    <div>
       <LevelGrid category={category} />
       <CategoryList categories={getCategories()} />
     </div>
