@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { MOBILE_BREAKPOINT } from "../core/constants";
 
 const Container = styled.div`
   height: 100%;
@@ -9,13 +10,18 @@ const Container = styled.div`
   align-items: center;
   justify-content: space-evenly;
   flex-direction: column;
+  height: 100vh;
 `;
 
 const Title = styled.h1`
   margin: 0;
   font-weight: bold;
-  font-size: 80px;
+  font-size: 50px;
   text-align: center;
+
+  @media (min-width: ${MOBILE_BREAKPOINT}) {
+    font-size: 80px;
+  }
 `;
 
 const Button = styled.button`
@@ -24,7 +30,7 @@ const Button = styled.button`
   background-color: #863a86;
   color: white;
   padding: 30px;
-  font-size: 46px;
+  font-size: 30px;
   cursor: pointer;
   position: relative;
   border-style: none;
@@ -41,13 +47,17 @@ const Button = styled.button`
     transition: border-radius 0.8s ease;
   }
 
-  &:hover {
+  &:hover, &:active {
     background-color: #9C5D9C;
     border-radius: 100px;
 
     &:before {
       border-radius: 100px;
     }
+  }
+
+  @media (min-width: ${MOBILE_BREAKPOINT}) {
+    font-size: 46px;
   }
 `;
 
