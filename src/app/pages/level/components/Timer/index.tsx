@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import { GameContext } from "../../context";
+import { TimerContext } from "../../context/timer";
 
 const Container = styled.div`
   width: 60px;
@@ -14,7 +14,7 @@ const PointsSeparator = styled.span`
 `;
 
 const Timer: React.FunctionComponent = () => {
-  const { elapsedTime: { minutes, seconds } } = React.useContext(GameContext);
+  const { elapsedTime: { minutes, seconds } } = React.useContext(TimerContext);
   return (
     <Container>
       <span>{minutes}</span>

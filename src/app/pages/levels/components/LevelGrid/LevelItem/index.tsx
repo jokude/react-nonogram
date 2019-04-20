@@ -2,6 +2,7 @@ import { styled } from "Lib/styledComponents";
 import * as React from "react";
 import { ICategory } from "Types/Category";
 import { ILevel } from "Types/Level";
+import { formatMilliseconds } from "../../../../core/timer/format";
 import { Image } from "./Image";
 import { LevelCard } from "./LevelCard";
 import { Title } from "./Title";
@@ -25,13 +26,14 @@ const Separator = styled.hr`
 `;
 
 export const LevelItem: React.FunctionComponent<IProps> = ({ category, level }) => {
+  const time = level.timeResult ? formatMilliseconds(level.timeResult) : { minutes: "--", seconds: "--" };
   return (
     <LevelCard category={category} level={level}>
       <Title>{level.title}</Title>
       <Separator />
       <Image category={category} level={level} />
       <Separator />
-      <Time>--:--</Time>
+      <Time>{time.minutes}:{time.seconds}</Time>
     </LevelCard>
   );
 };
