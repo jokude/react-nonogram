@@ -1,13 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-      <link href="https://fonts.googleapis.com/css?family=Exo:700" rel="stylesheet">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <% if(htmlWebpackPlugin.files.chunks.webfont) { %>
+      <script src="<%= htmlWebpackPlugin.files.chunks.webfont.entry %>"></script>
+    <% } %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
       html,
       body,
       #app {
         margin: 0;
+      }
+      body {
+        background-image: url("${BASE_PATH}assets/background.png");
+        background-repeat: repeat;
+
+      }
+      html {
+        font-weight: 700;
+        font-family: 'Exo', Arial, Helvetica, sans-serif;
+      }
+      .wf-loading {
+        opacity: 0;
       }
     </style>
     <meta charset="UTF-8" />
@@ -15,5 +29,8 @@
   </head>
   <body>
     <div id="app"></div>
+    <% if(htmlWebpackPlugin.files.chunks.index) { %>
+      <script src="<%= htmlWebpackPlugin.files.chunks.index.entry %>"></script>
+    <% } %>
   </body>
 </html>

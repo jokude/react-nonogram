@@ -10,7 +10,7 @@ const resolve = location => path.resolve(__dirname, location);
 module.exports = merge(common, {
   mode: "production",
   output: {
-    filename: "bundle.production.js"
+    filename: "[name].bundle.production.js"
   },
   module: {
     rules: [

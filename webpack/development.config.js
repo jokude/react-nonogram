@@ -11,7 +11,7 @@ module.exports = merge(common, {
   devtool: "inline-source-map",
   mode: "development",
   output: {
-    filename: "bundle.development.js",
+    filename: "[name].bundle.development.js",
     publicPath: "/"
   },
   module: {

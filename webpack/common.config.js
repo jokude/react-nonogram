@@ -9,7 +9,8 @@ module.exports = {
   target: "web",
 
   entry: {
-    index: resolve("../src/index.ts")
+    index: resolve("../src/index.ts"),
+    webfont: resolve("../webfontload.ts"),
   },
 
   output: {
@@ -31,7 +32,9 @@ module.exports = {
       template: resolve("../src/html/template.html"),
       minify: {
         collapseWhitespace: true
-      }
+      },
+      inject: false,
+      chunks: ['index', 'webfont']
     })
   ]
 };
