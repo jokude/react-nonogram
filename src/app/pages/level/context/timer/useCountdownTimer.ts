@@ -1,6 +1,6 @@
+import { ONE_MINUTE, ONE_SECOND } from "Commons/timer/constants";
+import { millisecondsToTime } from "Commons/timer/format";
 import * as React from "react";
-import { ONE_MINUTE, ONE_SECOND } from "../../../core/timer/constants";
-import { formatMilliseconds } from "../../../core/timer/format";
 import { ITimerInput, ITimerOutput } from "./types";
 
 const getTimer = (callback: () => void): number => {
@@ -29,6 +29,10 @@ const useCountdownTimer = ({ countdownSeconds, onTimeout }: ITimerInput): ITimer
     clearInterval(timer);
     if (elapsed > ONE_MINUTE) {
       setElapsed(elapsed - ONE_MINUTE);
+    } else {
+      setTimer(null);
+      onTimeout(elapsed);
+      return;
     }
     const newTimer = getTimer(callback);
     setTimer(newTimer);
@@ -40,7 +44,7 @@ const useCountdownTimer = ({ countdownSeconds, onTimeout }: ITimerInput): ITimer
   }, []);
 
   return {
-    elapsedTime: formatMilliseconds(elapsed),
+    elapsedTime: millisecondsToTime(elapsed),
     stopped: timer === null,
     substractMinute: substractTime,
   };

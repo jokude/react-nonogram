@@ -1,3 +1,4 @@
+import { setPaddingZero } from "Commons/timer/format";
 import * as React from "react";
 import styled from "styled-components";
 import { TimerContext } from "../../context/timer";
@@ -17,9 +18,9 @@ const Timer: React.FunctionComponent = () => {
   const { elapsedTime: { minutes, seconds } } = React.useContext(TimerContext);
   return (
     <Container>
-      <span>{minutes}</span>
+      <span>{setPaddingZero(minutes)}</span>
       <PointsSeparator>:</PointsSeparator>
-      <span>{seconds}</span>
+      <span>{setPaddingZero(seconds)}</span>
     </Container>
   );
 };

@@ -1,4 +1,4 @@
-import { ITimer } from "../../../core/timer/types";
+import { ITimer } from "Commons/timer/types";
 
 export interface ITimerInput {
   countdownSeconds: number;

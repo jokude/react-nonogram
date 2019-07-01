@@ -1,6 +1,6 @@
 import { Home } from "Pages/home";
 import { LevelPage } from "Pages/level";
-import { Levels } from "Pages/levels";
+import { Page as LevelsPage } from "Pages/levels/components/Page";
 import { NotFound } from "Pages/notFound";
 
 export const routes = [
@@ -14,8 +14,8 @@ export const routes = [
     path: "/category/:categoryId/level/:levelId",
   },
   {
-    component: Levels,
     path: "/category/:categoryId",
+    component: LevelsPage,
   },
   {
     component: NotFound,

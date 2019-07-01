@@ -8,7 +8,6 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   position: relative;
-  border: 2px solid black;
   border-radius: 4px;
 
   @media only screen and (max-width: 600px) {

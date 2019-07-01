@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { MOBILE_BREAKPOINT } from "../../constants";
+import { Breakpoints } from "../constants";
 
-export const Container = styled.div`
+export const MainLayout = styled.div`
   align-items: center;
   background-color: white;
   margin: auto;
@@ -12,12 +12,11 @@ export const Container = styled.div`
   bottom: 0;
   right: 0;
   left: 0;
-  font-family: 'Exo', sans-serif;
 
-  @media (min-width: ${MOBILE_BREAKPOINT}) {
+  @media (min-width: ${Breakpoints.lg}px) {
     border: 10px solid #888098;
     border-radius: 10px;
-    max-width: ${MOBILE_BREAKPOINT};
+    max-width: ${Breakpoints.lg}px;
     max-height: 800px;
     position: absolute;
   }

@@ -1,10 +1,8 @@
+import { getCategoryNames } from "Datasource/datasource";
 import { styled } from "Lib/styledComponents";
 import * as React from "react";
 import { RouteChildrenProps, withRouter } from "react-router";
-import { getCategoryNames } from "../../../../datasource/datasource";
-
-interface IActiveProps extends RouteChildrenProps<{ categoryId: string }> {
-}
+import { CATEGORY_CHANGE_ANIMATION_MILLISECONDS } from "../../constants";
 
 const ActiveContainer = styled.div`
   pointer-events: none;
@@ -21,7 +19,7 @@ const ActiveBackground = styled.div<{ position: number }>`
   ${({ theme, position }) => `
     color: ${theme.colors.black};
     background: ${theme.colors.white};
-    transition: all 1s ease;
+    transition: all ${CATEGORY_CHANGE_ANIMATION_MILLISECONDS}ms ease-out;
     transform: translateX(${position * 100}%);
     mix-blend-mode: difference;
     border-radius: 14px;
@@ -29,7 +27,7 @@ const ActiveBackground = styled.div<{ position: number }>`
   `}
 `;
 
-const BasicActive: React.FunctionComponent<IActiveProps> = ({ match }) => (
+const BasicActive: React.FunctionComponent<RouteChildrenProps<{ categoryId: string }>> = ({ match }) => (
   <ActiveContainer>
     <ActiveBackground position={getCategoryNames().indexOf(match.params.categoryId)} />
   </ActiveContainer>

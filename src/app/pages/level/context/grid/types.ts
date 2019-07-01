@@ -1,3 +1,4 @@
+import { ITimer } from "Commons/timer/types";
 import { CellStatus } from "Types/CellStatus";
 import { ILevel } from "Types/Level";
 import { IPosition } from "../types";
@@ -14,7 +15,7 @@ export interface IGridInput {
   level: ILevel["grid"];
   size: number;
   onPaintFail: () => void;
-  onGridSolved: () => void;
+  onGridSolved: (time: ITimer) => void;
 }
 
 export interface IAction  {
@@ -41,7 +42,7 @@ export interface IAfterPaintCellPayload {
   level: ILevel["grid"];
   position: IPosition;
   onPaintFail: IGridInput["onPaintFail"];
-  onGridSolved: IGridInput["onGridSolved"];
+  onGridSolved: () => void;
 }
 
 export { CellStatus, ILevel, IPosition };

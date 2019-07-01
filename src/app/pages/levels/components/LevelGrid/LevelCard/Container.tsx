@@ -1,16 +1,12 @@
 import { styled } from "Lib/styledComponents";
 import * as React from "react";
 import { Link } from "react-router-dom";
-import { ICategory } from "Types/Category";
-import { ILevel } from "Types/Level";
-import { transformName } from "../../../../../datasource/datasource";
 
 interface IProps {
-  category: ICategory;
-  level: ILevel;
+  url: string;
 }
 
-const Container = styled(Link)`
+const ContainerLink = styled(Link)`
   color: black;
   text-decoration: none;
   border: 1px solid black;
@@ -27,8 +23,8 @@ const Container = styled(Link)`
   }
 `;
 
-export const LevelCard: React.FunctionComponent<IProps> = ({ category, level, children }) => (
-  <Container to={`/category/${category.title}/level/${transformName(level.title)}`}>
+export const Container: React.FunctionComponent<IProps> = ({ url, children }) => (
+  <ContainerLink to={url}>
     {children}
-  </Container>
+  </ContainerLink>
 );

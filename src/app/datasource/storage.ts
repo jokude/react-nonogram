@@ -1,14 +1,15 @@
+import { ITimer } from "Commons/timer/types";
 import { ICategory } from "Types/Category";
 import { ILevel } from "Types/Level";
 
-const storeKey = (categoryName: ICategory["title"], level: ILevel["title"]) => `${categoryName}.${level}`;
+const storeKey = (categoryTitle: ICategory["title"], level: ILevel["title"]) => `${categoryTitle}.${level}`;
 
 export const hasLocalStorage = window.localStorage !== null;
 
-export const setLevelTime = (categoryName: ICategory["title"], level: ILevel["title"], time: number): void =>
-  localStorage.setItem(storeKey(categoryName, level), time.toString());
+export const setLevelTime = (categoryTitle: ICategory["title"], levelTitle: ILevel["title"], time: ITimer): void =>
+  localStorage.setItem(storeKey(categoryTitle, levelTitle), JSON.stringify(time));
 
-export const getLevelTime = (categoryName: ICategory["title"], level: ILevel["title"]): number => {
-  const value = localStorage.getItem(storeKey(categoryName, level));
-  return parseInt(value, 10) || undefined;
+export const getLevelTime = (categoryTitle: ICategory["title"], levelTitle: ILevel["title"]): ITimer => {
+  const storedValue = localStorage.getItem(storeKey(categoryTitle, levelTitle));
+  return JSON.parse(storedValue) || undefined;
 };

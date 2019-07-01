@@ -1,5 +1,7 @@
+import { ITimer } from "Commons/timer/types";
+
 export interface ILevel {
   title: string;
   grid: boolean[][];
-  timeResult: number | undefined;
+  timeResult: ITimer | undefined;
 }
