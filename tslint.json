@@ -4,6 +4,7 @@
     "exclude": ["node_modules"]
   },
   "rules": {
+    "jsx-no-lambda": false,
     "jsx-no-multiline-js": false
   }
 }
