@@ -1,5 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -0.5 10 10" shape-rendering="crispEdges">
-<metadata>Made with Pixels to Svg https://codepen.io/shshaw/pen/XbxvNj</metadata>
-<path stroke="#ffffff" d="M0 0h6M9 0h1M0 1h5M6 1h3M0 2h4M5 2h4M0 3h3M4 3h1M7 3h2M0 4h2M3 4h1M5 4h1M7 4h1M9 4h1M0 5h3M4 5h1M6 5h1M8 5h2M0 6h2M3 6h1M5 6h1M7 6h3M0 7h1M2 7h3M6 7h4M0 8h1M2 8h2M5 8h5M0 9h2M4 9h6" />
-<path stroke="#000000" d="M6 0h3M5 1h1M9 1h1M4 2h1M9 2h1M3 3h1M5 3h2M9 3h1M2 4h1M4 4h1M6 4h1M8 4h1M3 5h1M5 5h1M7 5h1M2 6h1M4 6h1M6 6h1M1 7h1M5 7h1M1 8h1M4 8h1M2 9h2" />
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -0.5 10 10" shape-rendering="crispEdges"><path d="M5.5 0h3m-4 1h1m3 0h1m-6 1h1m4 0h1m-7 1h1m1 0h2m2 0h1m-8 1h1m1 0h1m1 0h1m1 0h1m-6 1h1m1 0h1m1 0h1m-6 1h1m1 0h1m1 0h1m-6 1h1m3 0h1m-5 1h1m2 0h1m-3 1h2" stroke="#000"/></svg>

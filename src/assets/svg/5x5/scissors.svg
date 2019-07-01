@@ -1,5 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -0.5 5 5" shape-rendering="crispEdges">
-<metadata>Made with Pixels to Svg https://codepen.io/shshaw/pen/XbxvNj</metadata>
-<path stroke="#000000" d="M0 0h1M4 0h1M1 1h1M3 1h1M2 2h1M0 3h2M3 3h2M0 4h2M3 4h2" />
-<path stroke="#ffffff" d="M1 0h3M0 1h1M2 1h1M4 1h1M0 2h2M3 2h2M2 3h1M2 4h1" />
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -0.5 5 5" shape-rendering="crispEdges"><path stroke="#000" d="M0 0h1m3 0h1M1 1h1m1 0h1M2 2h1M0 3h2m1 0h2M0 4h2m1 0h2"/></svg>
