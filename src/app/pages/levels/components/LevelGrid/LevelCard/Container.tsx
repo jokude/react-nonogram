@@ -14,7 +14,7 @@ const ContainerLink = styled(Link)`
   display: flex;
   flex-direction: column;
   height: 150px;
-  width: 100px;
+  width: 90px;
   transform-origin: center;
   transition: transform 0.1s ease;
 

@@ -10,10 +10,15 @@ interface IProps {
 
 const Container = styled.div`
   align-items: center;
+  justify-content: center;
   display: flex;
   padding: 10px;
   flex-grow: 1;
-  height: 100px;
+
+  & > img {
+    max-width: 100%;
+    height: auto;
+  }
 `;
 
 export const Image: React.FunctionComponent<IProps> = ({ src }) => (

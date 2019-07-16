@@ -9,8 +9,6 @@ export interface IRotateTransitionGroupProps {
 
 const RotateContainer = styled.div`
   position: relative;
-  height: 150px;
-  width: 100px;
   transform-style: preserve-3d;
 `;
 
@@ -20,7 +18,9 @@ const childFactoryCreator = (props: any) => (
   )
 );
 
-export const RotateTransitionGroup: React.FunctionComponent<IRotateTransitionGroupProps> = ({ children, childrenProps }) => (
+export const RotateTransitionGroup: React.FunctionComponent<IRotateTransitionGroupProps> = ({
+  children, childrenProps,
+}) => (
   <TransitionGroup component={RotateContainer} childFactory={childFactoryCreator(childrenProps)}>
     {children}
   </TransitionGroup>

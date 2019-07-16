@@ -4,55 +4,52 @@ import { TransitionProps } from "react-transition-group/Transition";
 import styled from "styled-components";
 import { CATEGORY_CHANGE_ANIMATION_MILLISECONDS } from "../../../constants";
 
-export interface IRotateTransitionProps extends Partial<TransitionProps> {
+export interface IRotateProps {
   rotateLeft: boolean;
   delay: number;
 }
 
-const RotateContainer2 = styled.div<{ rotateLeft: boolean; delay: number; }>`
+export interface IRotateTransitionProps extends IRotateProps, Partial<TransitionProps> {}
+
+const ROTATE_CLASSNAME = "rotation";
+
+const Container = styled.div<IRotateProps>`
   backface-visibility: hidden;
   transition: all ${CATEGORY_CHANGE_ANIMATION_MILLISECONDS}ms ease-out;
   transform-style: preserve-3d;
   transform: rotateY(0deg);
-  position: absolute;
-  left: 0;
-  top: 0;
 
   ${({ rotateLeft, delay }) => `
     transition-delay: ${delay}ms;
 
-    &.my-node-enter {
+    &.${ROTATE_CLASSNAME}-enter {
       transform: rotateY(${rotateLeft ? "" : "-"}180deg);
-      z-index: 2;
     }
-    &.my-node-enter-active {
+    &.${ROTATE_CLASSNAME}-enter-active,
+     .${ROTATE_CLASSNAME}-enter-done,
+     .${ROTATE_CLASSNAME}-exit {
       transform: rotateY(0deg);
-      z-index: 2;
     }
-    &.my-node-enter-done {
-      transform: rotateY(0deg);
-      z-index: 2;
-    }
-    &.my-node-exit {
-      transform: rotateY(0deg);
-      z-index: 1;
-    }
-    &.my-node-exit-active {
+    &.${ROTATE_CLASSNAME}-exit-active,
+     .${ROTATE_CLASSNAME}-exit-done {
       transform: rotateY(${rotateLeft ? "-" : ""}180deg);
-      z-index: 1;
     }
-    &.my-node-exit-done {
-      transform: rotateY(${rotateLeft ? "-" : ""}180deg);
-      z-index: 1;
-    }
+    &.${ROTATE_CLASSNAME}-exit,
+     .${ROTATE_CLASSNAME}-exit-active,
+     .${ROTATE_CLASSNAME}-exit-done {
+      position: absolute;
+      left: 0;
+      top: 0;
+     }
   `}
 `;
 
-export const RotateTransition: React.FunctionComponent<IRotateTransitionProps> = ({ children, rotateLeft, delay, ...props }) => {
-  return (
-  <CSSTransition timeout={CATEGORY_CHANGE_ANIMATION_MILLISECONDS + delay} classNames="my-node" {...props}>
-    <RotateContainer2 rotateLeft={rotateLeft} delay={delay}>
+export const RotateTransition: React.FunctionComponent<IRotateTransitionProps> = ({
+  children, rotateLeft, delay, ...props
+}) => (
+  <CSSTransition timeout={CATEGORY_CHANGE_ANIMATION_MILLISECONDS + delay} classNames={ROTATE_CLASSNAME} {...props}>
+    <Container rotateLeft={rotateLeft} delay={delay}>
       {children}
-    </RotateContainer2>
+    </Container>
   </CSSTransition>
-); };
+);

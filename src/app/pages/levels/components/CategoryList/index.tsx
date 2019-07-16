@@ -1,3 +1,4 @@
+import { Breakpoints } from "Commons/constants";
 import * as React from "react";
 import styled from "styled-components";
 import { ICategory } from "Types/Category";
@@ -10,7 +11,7 @@ const Container = styled.div`
   position: relative;
   border-radius: 4px;
 
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: ${Breakpoints.lg + 40}px) {
     position: fixed;
     left: 0;
     right: 0;

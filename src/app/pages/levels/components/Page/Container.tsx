@@ -1,9 +1,14 @@
+import { Breakpoints } from "Commons/constants";
 import styled from "styled-components";
 
 export const Container = styled.div`
-  height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background: white;
+
+  @media only screen and (min-width: ${Breakpoints.lg + 40}px) {
+    height: 100%;
+  }
 `;
