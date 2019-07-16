@@ -1,13 +1,15 @@
 import * as React from "react";
-import { HintsContext } from "../../context/hints";
-import { IPosition } from "../../context/types";
-import { Row } from "./Containers";
-import { HintsFlow } from "./types";
+import { CategorySize } from "Types/Category";
+import { HintsContext } from "../../../../context/hints";
+import { IPosition } from "../../../../context/types";
+import { HintsFlow } from "../types";
+import { StyledRow } from "./StyledRow";
 
-interface IRowProps {
+export interface IRowProps {
   total: number;
   rowIndex: number;
   flow: HintsFlow;
+  size: CategorySize;
 }
 
 const checkHighlight = (position: IPosition, flow: HintsFlow, rowIndex: number) => {
@@ -17,12 +19,12 @@ const checkHighlight = (position: IPosition, flow: HintsFlow, rowIndex: number) 
   return flow === HintsFlow.Horizontal ? rowIndex === position.row : rowIndex === position.column;
 };
 
-export const HintRow: React.FunctionComponent<IRowProps> = ({ total, rowIndex, flow, children }) => {
+export const Row: React.FunctionComponent<IRowProps> = ({ total, rowIndex, flow, children }) => {
   const { highlightedCell } = React.useContext(HintsContext);
   const isHighlighted = checkHighlight(highlightedCell, flow, rowIndex);
   return (
-    <Row total={total} flow={flow} highlighted={isHighlighted}>
+    <StyledRow total={total} flow={flow} highlighted={isHighlighted}>
       {children}
-    </Row>
+    </StyledRow>
   );
 };

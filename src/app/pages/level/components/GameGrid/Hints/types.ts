@@ -1,5 +1,5 @@
 
-import { ICategory } from "Types/Category";
+import { CategorySize } from "Types/Category";
 import { ILevel } from "Types/Level";
 
 export enum HintsFlow {
@@ -8,7 +8,7 @@ export enum HintsFlow {
 }
 
 export interface IHintsProps {
-  size: ICategory["size"];
+  size: CategorySize;
   level: ILevel["grid"];
   flow: HintsFlow;
 }

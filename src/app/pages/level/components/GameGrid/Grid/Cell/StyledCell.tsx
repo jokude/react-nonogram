@@ -1,13 +1,11 @@
-import * as React from "react";
+import { Breakpoints } from "Commons/constants";
 import styled from "styled-components";
+import { CategorySize } from "Types/Category";
 import { CellStatus } from "Types/CellStatus";
 
-interface IProps {
+interface ICellProps {
   status: CellStatus;
-  onClick: () => void;
-  onRightClick: () => void;
-  onMouseEnter: () => void;
-  onMouseLeave: () => void;
+  size: CategorySize;
 }
 
 const getStatusStyle = (status: CellStatus): string => {
@@ -64,14 +62,14 @@ const getStatusStyle = (status: CellStatus): string => {
   }
 };
 
-const Container = styled.div<{ status: CellStatus }>`
+export const StyledCell = styled.div<ICellProps>`
   background-color: white;
   border: 2px solid #B9B2D2;
   border-radius: 2px;
-  padding: 2px;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 2px;
   transition: border 0.2s ease, background-color 0.2s ease;
 
   &:after {
@@ -80,41 +78,27 @@ const Container = styled.div<{ status: CellStatus }>`
     height: 100%;
     display: block;
     transform: scale(0);
-    transition: transform 0.3s ease;
+    transition: transform 0.2s ease;
   }
 
   &:hover {
     cursor: pointer;
   }
 
-  ${({ status }) => getStatusStyle(status)};
+  &:focus {
+    outline: none;
+  }
+
+  ${({ status, size }) => `
+    ${getStatusStyle(status)};
+
+    ${size === 15 && `
+      @media only screen and (max-width: ${Breakpoints.sm}px) {
+        border: none;
+        outline: 1px solid #9892AC;
+        border-radius: 0;
+        padding: 0;
+      }
+    `}
+  `};
 `;
-
-const onContextMenuHandler = (callback: () => void) => (evt: React.MouseEvent<HTMLElement>) => {
-  evt.preventDefault();
-  callback();
-};
-
-const onMouseEnterHandler = (onLeftClick: () => void, onRightClick: () => void, onMouseEnter: () => void) =>
-  (evt: React.MouseEvent<HTMLElement>) => {
-    onMouseEnter();
-    if (evt.buttons === 1) {
-      onLeftClick();
-    } else if (evt.buttons === 2) {
-      onContextMenuHandler(onRightClick)(evt);
-    }
-  };
-
-export const Cell: React.FunctionComponent<IProps> = ({
-  status, onClick, onRightClick, onMouseEnter, onMouseLeave,
-}) => {
-  return (
-    <Container
-      status={status}
-      onClick={onClick}
-      onContextMenu={onContextMenuHandler(onRightClick)}
-      onMouseEnter={onMouseEnterHandler(onClick, onRightClick, onMouseEnter)}
-      onMouseLeave={onMouseLeave}
-    />
-  );
-};

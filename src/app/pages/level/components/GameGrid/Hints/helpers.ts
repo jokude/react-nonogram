@@ -1,4 +1,4 @@
-import { HintsFlow, IHintCell, IHintsProps } from "./types";
+import { HintsFlow, IHintCell } from "./types";
 
 export const isHorizontal = (flow: HintsFlow) => flow === HintsFlow.Horizontal;
 
@@ -21,18 +21,6 @@ export const buildHints = (cellLine: boolean[]): IHintCell[] => {
   }
 
   return hints;
-};
-
-export const getCellPixelSize = (size: IHintsProps["size"]) => {
-  switch (size) {
-    case 5:
-      return 60;
-    case 10:
-      return 40;
-    case 15:
-    default:
-      return 30;
-  }
 };
 
 export const transpose = <T>(a: T[][]): T[][] =>
