@@ -85,7 +85,9 @@ const isGridSolved = (grid: Grid, level: ILevel["grid"]) => level.every(
       isCellSolved(grid[rowIndex][columnIndex], cell)),
   );
 
-export const useGrid = ({ size, level, onPaintFail, onGridSolved }: IGridInput): IGridOutput => {
+type UseGridInput = Pick<IGridInput, "size" | "level" | "onPaintFail"> & { onGridSolved: () => void };
+
+export const useGrid = ({ size, level, onPaintFail, onGridSolved }: UseGridInput): IGridOutput => {
 
   const [state, dispatch] = React.useReducer(reducer, getInitialGrid(size));
 
