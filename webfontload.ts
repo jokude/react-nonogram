@@ -1,7 +1,7 @@
-import { load } from 'webfontloader';
+import { load } from "webfontloader";
 
 load({
   google: {
-    families: ['Exo:700:latin']
+    families: ["Exo:500,700:latin"]
   }
 });
