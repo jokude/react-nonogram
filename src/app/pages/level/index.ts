@@ -1,1 +1,1 @@
-export { LevelPage } from "./components/Level";
+export { LevelPage } from "./components/LevelPage";
