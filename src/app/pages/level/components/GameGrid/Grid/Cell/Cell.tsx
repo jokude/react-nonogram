@@ -6,8 +6,8 @@ import { StyledCell } from "./StyledCell";
 interface IProps {
   size: CategorySize;
   status: CellStatus;
-  onClick: React.MouseEventHandler;
-  onTouch: React.TouchEventHandler;
+  onClick?: React.MouseEventHandler;
+  onTouch?: React.TouchEventHandler;
   onRightClick: React.MouseEventHandler;
   onMouseEnter: React.MouseEventHandler;
   onMouseLeave: React.MouseEventHandler;
@@ -46,10 +46,10 @@ const onClickHandler = (
 };
 
 const onTouchStartEnterHandler = (
-  onTouchMove: React.TouchEventHandler,
-) => (evt: React.TouchEvent) => onTouchMove(evt);
+  onTouchStart: React.TouchEventHandler,
+) => (evt: React.TouchEvent) => onTouchStart(evt);
 
-export const Cell: React.FunctionComponent<IProps> = ({
+const Cell: React.FunctionComponent<IProps> = ({
   status, onClick, onTouch, onRightClick, onMouseEnter, onMouseLeave, size,
 }) => (
   <StyledCell
@@ -62,3 +62,12 @@ export const Cell: React.FunctionComponent<IProps> = ({
     onMouseLeave={onMouseLeave}
   />
 );
+
+Cell.defaultProps = {
+  onClick: () => undefined,
+  onMouseEnter: () => undefined,
+  onMouseLeave: () => undefined,
+  onRightClick: () => undefined,
+}
+
+export { Cell };
