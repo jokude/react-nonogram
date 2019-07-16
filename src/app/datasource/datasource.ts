@@ -34,7 +34,7 @@ const parseLevel = (category: IDataCategory, level: IDataLevel): ILevel => ({
 export const getCategoryNames = (): string[] => gameData.map((category) => category.title);
 
 export const getCategory = (title: string): ICategory => {
-  const category = gameData.find((categoryData: IDataCategory) => categoryData.title === title);
+  const category = gameData.find((categoryData: IDataCategory) => categoryData.title === title) as IDataCategory;
   return parseCategory(category);
 };
 

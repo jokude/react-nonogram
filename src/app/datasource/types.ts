@@ -1,3 +1,5 @@
+import { CategorySize } from "Types/Category";
+
 export interface IDataLevel {
   title: string;
   grid: string;
@@ -5,7 +7,7 @@ export interface IDataLevel {
 
 export interface IDataCategory {
   title: string;
-  size: number;
+  size: CategorySize;
   countdownMinutes: number;
   levels: IDataLevel[];
 }
