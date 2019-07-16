@@ -14,8 +14,8 @@ export const routes = [
     path: "/category/:categoryId/level/:levelId",
   },
   {
-    path: "/category/:categoryId",
     component: LevelsPage,
+    path: "/category/:categoryId",
   },
   {
     component: NotFound,
