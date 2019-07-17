@@ -1,1 +1,1 @@
-export { LevelPage } from "./LevelPage";
+export { Page as LevelPage } from "./Page";
