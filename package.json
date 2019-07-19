@@ -10,7 +10,8 @@
     "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'",
     "lint:fix": "npm run lint -- --fix",
     "start": "npm run build && node src/server",
-    "start:dev": "webpack-dev-server --config webpack/development.config.js"
+    "start:dev": "webpack-dev-server --config webpack/development.config.js",
+    "analyze": "webpack --config webpack/analyzer.config.js"
   },
   "author": "Richard Hidalgo",
   "license": "BSD-2-Clause",
@@ -41,12 +42,12 @@
     "typescript-plugin-styled-components": "^1.4.3",
     "webpack": "^4.35.3",
     "webpack-cli": "^3.3.6",
+    "webpack-bundle-analyzer": "^3.3.2",
     "webpack-dev-server": "^3.7.2",
     "webpack-merge": "^4.2.1"
   },
   "keywords": [
     "react",
     "nonogram"
-  ],
-  "pre-commit": []
+  ]
 }
