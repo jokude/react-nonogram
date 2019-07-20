@@ -1,4 +1,4 @@
-import { IRotateTransitionProps, RotateTransition } from "./RotateTransition";
-import { IRotateTransitionGroupProps, RotateTransitionGroup } from "./RotateTransitionGroup";
+import { Rotate } from "./Rotate";
+import { useRotateDirection } from "./useRotateDirection";
 
-export { RotateTransition, RotateTransitionGroup, IRotateTransitionProps, IRotateTransitionGroupProps };
+export { Rotate, useRotateDirection };

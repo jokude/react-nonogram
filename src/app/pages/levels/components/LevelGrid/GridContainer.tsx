@@ -1,7 +1,7 @@
 import { Breakpoints } from "Commons/constants";
 import styled from "styled-components";
 
-export const Grid = styled.div`
+export const GridContainer = styled.div`
   margin: 20px 10px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
