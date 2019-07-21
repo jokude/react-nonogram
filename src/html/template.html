@@ -25,8 +25,10 @@
     </style>
     <meta charset="UTF-8" />
     <meta name="description" content="Puzzle nonogram game made with React"/>
-    <link rel="icon" href="/assets/favicon.ico">
     <title>React Nonogram</title>
+    <% if(webpackConfig.output.publicPath) { %>
+      <link rel="icon" href="<%= webpackConfig.output.publicPath %>assets/favicon.ico">
+    <% } %>
   </head>
   <body>
     <div id="app"></div>
