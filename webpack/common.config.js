@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const getAliases = require("./aliases");
 
 const resolve = location => path.resolve(__dirname, location);
+const publicPath = process.env.PUBLIC_PATH || '/';
 
 module.exports = {
   target: "web",
@@ -15,7 +16,7 @@ module.exports = {
 
   output: {
     path: resolve("../build"),
-    publicPath: process.env.PUBLIC_PATH || '/'
+    publicPath
   },
 
   resolve: {
@@ -25,7 +26,7 @@ module.exports = {
 
   plugins: [
     new webpack.DefinePlugin({
-      BASE_PATH: JSON.stringify(process.env.PUBLIC_PATH || '/'),
+      BASE_PATH: JSON.stringify(publicPath),
       USE_HASH_ROUTER: Boolean(process.env.USE_HASH_ROUTER)
     }),
     new HtmlWebpackPlugin({
