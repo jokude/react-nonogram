@@ -1,4 +1,4 @@
-import { getCategory, transformName } from "Datasource/datasource";
+import { getLevel } from "Datasource/datasource";
 import * as React from "react";
 import { RouteChildrenProps } from "react-router";
 import { ICategory } from "Types/Category";
@@ -15,22 +15,21 @@ type IPageProps = RouteChildrenProps<{
 }>;
 
 export const Page: React.FunctionComponent<IPageProps> = ({ match: { params: { categoryId, levelId } } }) => {
-  const category = getCategory(categoryId);
-  const categoryLevel = category.levels.find((level: ILevel) => transformName(level.title) === levelId);
   const [result, setResult] = React.useState<GameResult>(null);
+  const level = getLevel(categoryId, levelId);
 
   return (
     <PageContainer>
       {
         result === "Success" ? (
-          <SuccessDialog category={category} level={categoryLevel} />
+          <SuccessDialog category={level.category} level={level} />
         ) : (
           result === "Timeout" ? (
-            <TimeoutDialog category={category} onReset={() => setResult(null)} />
+            <TimeoutDialog category={level.category} onReset={() => setResult(null)} />
           ) : (
             <Level
-              category={category}
-              level={categoryLevel}
+              category={level.category}
+              level={level}
               onTimeout={() => setResult("Timeout")}
               onGameSolved={() => setResult("Success")}
             />

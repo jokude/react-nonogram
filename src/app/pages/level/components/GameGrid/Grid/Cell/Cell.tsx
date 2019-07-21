@@ -68,6 +68,6 @@ Cell.defaultProps = {
   onMouseEnter: () => undefined,
   onMouseLeave: () => undefined,
   onRightClick: () => undefined,
-}
+};
 
 export { Cell };

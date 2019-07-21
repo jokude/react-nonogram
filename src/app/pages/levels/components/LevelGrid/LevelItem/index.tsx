@@ -1,12 +1,12 @@
 import * as React from "react";
 import { ICategory } from "Types/Category";
-import { ILevel } from "Types/Level";
+import { ILevelSummary } from "Types/Level";
 import { LevelCard } from "../LevelCard";
 import { getItemInfo } from "./helpers";
 
 interface IProps {
   category: ICategory;
-  level: ILevel;
+  level: ILevelSummary;
 }
 
 export const LevelItem: React.FunctionComponent<IProps> = ({ category, level }) => (

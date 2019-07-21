@@ -1,5 +1,5 @@
 import { Breakpoints } from "Commons/constants";
-import { getCategory } from "Datasource/datasource";
+import { getCategoryWithLevels } from "Datasource/datasource";
 import * as React from "react";
 import { RouteChildrenProps, withRouter } from "react-router";
 import { ICategory } from "Types/Category";
@@ -28,7 +28,7 @@ const getDelay = (rotateLeft: boolean, index: number) => {
 
 const BaseLevelGrid: React.FunctionComponent<IProps> = ({ match }) => {
   const categoryId = match.params.categoryId;
-  const category = getCategory(categoryId);
+  const category = getCategoryWithLevels(categoryId);
   const rotateLeft = useRotateDirection(category.title);
   return (
     <GridContainer>
