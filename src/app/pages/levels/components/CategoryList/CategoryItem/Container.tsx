@@ -10,5 +10,4 @@ export const Container = styled(Link)`
   position: relative;
   color: ${({ theme }) => theme.colors.white};
   background: black;
-  transition: all 0.5s ease-out;
 `;
