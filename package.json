@@ -14,6 +14,9 @@
     "analyze": "webpack --config webpack/analyzer.config.js"
   },
   "author": "Richard Hidalgo",
+  "contributors": [
+    "Richard Hidalgo"
+  ],
   "license": "BSD-2-Clause",
   "dependencies": {
     "react": "^16.8.6",
@@ -49,5 +52,11 @@
   "keywords": [
     "react",
     "nonogram"
-  ]
+  ],
+  "engines": {
+    "node": ">=10.16.0"
+  },
+  "repository": "https://github.com/jokude/react-nonogram",
+  "homepage": "https://github.com/jokude/react-nonogram",
+  "bugs": "https://github.com/jokude/react-nonogram/issues"
 }
