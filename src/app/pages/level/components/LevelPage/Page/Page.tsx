@@ -1,8 +1,6 @@
 import { getLevel } from "Datasource/datasource";
 import * as React from "react";
 import { RouteChildrenProps } from "react-router";
-import { ICategory } from "Types/Category";
-import { ILevel } from "Types/Level";
 import { SuccessDialog, TimeoutDialog } from "../../Dialog";
 import { Level } from "../Level";
 import { PageContainer } from "./PageContainer";
@@ -10,8 +8,8 @@ import { PageContainer } from "./PageContainer";
 type GameResult = null | "Success" | "Timeout";
 
 type IPageProps = RouteChildrenProps<{
-  categoryId: ICategory["title"];
-  levelId: ILevel["title"];
+  categoryId: string;
+  levelId: string;
 }>;
 
 export const Page: React.FunctionComponent<IPageProps> = ({ match: { params: { categoryId, levelId } } }) => {

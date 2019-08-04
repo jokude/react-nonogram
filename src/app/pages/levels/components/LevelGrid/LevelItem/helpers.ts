@@ -5,13 +5,13 @@ import { ILevelCardProps } from "../LevelCard";
 
 export const getUnsolvedLevelInfo = (category: ICategory, level: ILevelSummary): ILevelCardProps => ({
   imageUrl: `question/${category.title}`,
-  levelUrl: `/category/${category.title}/level/${transformName(level.title)}`,
+  levelUrl: `/category/${category.title}/level/${level.id}`,
   title: "???",
 });
 
 export const getSolvedLevelInfo = (category: ICategory, level: ILevelSummary): ILevelCardProps => ({
   imageUrl: `${category.title}/${transformName(level.title)}`,
-  levelUrl: `/category/${category.title}/level/${transformName(level.title)}`,
+  levelUrl: `/category/${category.title}/level/${level.id}`,
   time: level.timeResult,
   title: level.title,
 });
