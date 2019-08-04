@@ -18,7 +18,7 @@ export const StyledRow = styled.div<IRowProps>`
     grid-template-${isHorizontal(flow) ? "column" : "row"}s: repeat(${total}, minmax(auto, 20px));
 
     @media only screen and (min-width: ${Breakpoints.lg}px) {
-      grid-template-${isHorizontal(flow) ? "column" : "row"}s: repeat(${total}, 30px);
+      grid-template-${isHorizontal(flow) ? "column" : "row"}s: repeat(${total}, minmax(auto, 30px));
     }
   `};
 `;
