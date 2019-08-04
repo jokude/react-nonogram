@@ -1,6 +1,7 @@
+import { decompressFromBase64 } from "lz-string";
 import { ICategory } from "Types/Category";
 import { ILevel, ILevelSummary } from "Types/Level";
-import gameData from "./gameData";
+import { categories } from "./gameData";
 import { getLevelTime } from "./storage";
 import { IDataCategory, IDataLevel } from "./types";
 
@@ -22,23 +23,25 @@ const parseCategory = (category: IDataCategory): ICategory => ({
 });
 
 const parseLevelSummary = (category: IDataCategory, level: IDataLevel): ILevelSummary => ({
+  id: level.id,
   timeResult: getLevelTime(category.title, level.title),
   title: level.title,
 });
 
 const parseLevel = (category: IDataCategory, level: IDataLevel): ILevel => ({
+  id: level.id,
   category: parseCategory(category),
   grid: chunkArray(
-    level.grid.split("").map((solution: string) => Boolean(parseInt(solution, 2))),
+    decompressFromBase64(level.grid).split("").map((solution: string) => Boolean(parseInt(solution, 2))),
     category.size,
   ),
   title: level.title,
 });
 
 const findCategoryByTitle = (title: string): IDataCategory =>
-  gameData.find((categoryData) => categoryData.title === title) as IDataCategory;
+  categories.find(category => category.title === title);
 
-export const getCategoryNames = (): Array<ICategory["title"]> => gameData.map((category) => category.title);
+export const getCategoryNames = (): Array<ICategory["title"]> => categories.map((category) => category.title);
 
 export const getCategory = (title: string): ICategory =>
   parseCategory(findCategoryByTitle(title));
@@ -52,8 +55,9 @@ export const getCategoryWithLevels = (title: string): ICategory & { levels: ILev
 };
 
 export const getLevel = (categoryId: string, levelId: string): ILevel => {
-  const category = gameData.find((categoryData) => categoryData.title === categoryId) as IDataCategory;
-  const result = category.levels.find((level) => transformName(level.title) === levelId);
+  const id = parseInt(levelId, 10);
+  const category = categories.find((categoryData) => categoryData.title === categoryId) as IDataCategory;
+  const result = category.levels.find(level => level.id === id);
   return parseLevel(category, result);
 };
 

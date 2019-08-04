@@ -1,6 +1,7 @@
 import { CategorySize } from "Types/Category";
 
 export interface IDataLevel {
+  id: number;
   title: string;
   grid: string;
 }
